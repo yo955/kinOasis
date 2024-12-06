@@ -1,0 +1,82 @@
+.container {
+  gap: 50px;
+  margin-top: 20px;
+}
+.infoContainer {
+  background-color: var(--bgSoft);
+  color: var(--textSoft);
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+  height: max-content;
+  margin: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.imgContainer {
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  margin: auto;
+}
+
+.formContainer {
+  flex: 1;
+  background-color: var(--bgSoft);
+  padding: 20px;
+  border-radius: 10px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form input,
+.form textarea,
+.form select {
+  padding: 20px;
+  border: 2px solid #2e374a;
+  border-radius: 5px;
+  background: var(--bg);
+  color: var(--text);
+  margin: 10px 0;
+}
+.form label {
+  font-size: 12px;
+}
+.form button {
+  width: 100%;
+  padding: 20px;
+  background-color: teal;
+  color: var(--text);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.AddApartmentBtn {
+  width: 100%;
+  padding: 20px;
+  background-color: teal;
+  color: var(--text);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.successMessage {
+  color: green;
+  font-weight: bold;
+}
+
+.errorMessage {
+  color: red;
+  font-weight: bold;
+}

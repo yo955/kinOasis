@@ -24,7 +24,7 @@ const Apartments = () => {
   const itemsPerPage = 6; // عدد العناصر المعروضة في كل صفحة
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
+  console.log(compound)
   function getApartments() {
     setLoading(true);
     axios
@@ -107,6 +107,15 @@ const Apartments = () => {
           استمتع بأسلوب حياة مترفة وفريدة من نوعها في مشروعنا السكني الفاخر،
           وحدات تمليك تجمع بين الرقي والراحة.
         </h2>
+    {compound.video &&     <video
+  controls
+  className="rounded-lg object-contain w-full max-h-[600px] md:max-h-[600px] h-auto"
+  style={{ maxWidth: "100%" }}
+>
+  <source src={compound?.video} type="video/mp4" />
+  <source src="movie.ogg" type="video/ogg" /> 
+  Your browser does not support the video tag.
+</video>}
         <Link
           href="https://wa.me/966553810363"
           className="text-black transition hover:text-gray-500/75 text-xl"

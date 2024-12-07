@@ -101,6 +101,7 @@ const AddProductPage = () => {
         address: "",
         pdf: "",
         map: "",
+        video:"",
         address: "",
       });
       setMainImage(null);
@@ -126,15 +127,36 @@ const AddProductPage = () => {
         /> */}{" "}
         {/***cloudinary btn***/}
         <div className={styles.infoContainer}>
-          <div className="btn-container flex items-center justify-between gap-5">
-            <div className="add-mainImage">
+          <div className="btn-container flex text-center items-center justify-between gap-5">
+           <div className="flex gap-3">
+           <div className="add-mainImage">
               <label className="my-5">Add Main Image</label>
               <UploadCareButton
+               key={Math.floor(Math.random(1020 * 1))}
                 setProduct={setProduct}
                 uniqueKey={"mainImage"}
                 className="mt-5"
               />
             </div>
+            <div className="add-video">
+              <label className="my-5">Add Video</label>
+              <UploadCareButton
+            key={Math.floor(Math.random(1020 * 4))}
+                setProduct={setProduct}
+                uniqueKey={"video"}
+                className="mt-5"
+              />
+            </div>
+            <div className="add-pdf">
+              <label className="my-5">Add PDF</label>
+              <UploadCareButton
+              key={Math.floor(Math.random(100 * 2))}
+                setProduct={setProduct}
+                uniqueKey={"pdf"}
+                className="mt-5"
+              />
+            </div>
+           </div>
             <div className="w-[400px] h-[180px] relative bg-slate-800">
               <Image
                 src={product.mainImage ? product.mainImage : "/noproduct.jpg"}
@@ -143,14 +165,7 @@ const AddProductPage = () => {
                 className="absolute rounded-md bg-cover"
               />
             </div>
-            <div className="add-pdf">
-              <label className="my-5">Add PDF</label>
-              <UploadCareButton
-                setProduct={setProduct}
-                uniqueKey={"pdf"}
-                className="mt-5"
-              />
-            </div>
+            
             {/* <div className="add-anotherImages">
               <label className="my-5">Add Additional Images</label>
               <UploadCareButton

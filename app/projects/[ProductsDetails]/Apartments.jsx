@@ -130,7 +130,7 @@ const Apartments = () => {
         <h1 className="text-4xl font-extrabold mb-5 text-blue-900">الوحدات</h1>
       </div>
 
-      <div className="cards grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 lg:max-w-screen-lg mx-auto">
+      <div className={`cards grid grid-cols-1 gap-8 ${currentApartments.length ? "md:grid-cols-2 lg:grid-cols-3 lg:max-w-screen-lg":""} mx-auto text-black text-center font-bold text-[1.2rem]`}>
         {loading ? (
           <div>جاري التحميل...</div>
         ) : error ? (

@@ -24,13 +24,13 @@ const Header = () => {
             <Link prefetch={true} className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
               <div className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-2xl z-10">
-                <Image
-                  className="z-10 object-contain"
-                  src="/logo.png"
-                  alt="شعار الموقع"
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
+                  <Image
+                    className="z-10 object-contain"
+                    src="/logo.png"
+                    alt="شعار الموقع"
+                    fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
               </div>
             </Link>
           </div>

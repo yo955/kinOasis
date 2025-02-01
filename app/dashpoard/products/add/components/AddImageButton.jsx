@@ -13,8 +13,6 @@ import CloudinaryUploadWidget from "../utils/CloudinaryUploadWidget";
 
   const [uploadPreset,setUpload] = useState("x0x_preset");
 
-
-
   const [uwConfig] = useState({
     cloudName,
     uploadPreset

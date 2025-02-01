@@ -40,7 +40,7 @@ const UploadCareButton = ({
         onChange={handleChangeEvent}
         sourceList="local, url, camera, dropbox"
         classNameUploader="uc-dark"
-        pubkey="5688cecd2781101b3805"
+        pubkey="bb826b56814c9a266153"
         className={className}
       />
     </div>

@@ -20,6 +20,10 @@ const HeroAbout = () => {
         <div className="max-w-5xl text-center ltr:sm:text-left rtl:sm:text-center w-full">
           <h1 className="text-4xl font-black text-white sm:text-6xl ">
             عن كن أويسس
+            {/* عن كن  */}
+          </h1>
+          <h1>
+          عن كن أويسس
           </h1>
 
           <p className="mt-4 lg:w-full leading-loose text-[#e2ab95] sm:text-xl/relaxed font-medium">

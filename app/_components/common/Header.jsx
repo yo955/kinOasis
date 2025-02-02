@@ -16,7 +16,8 @@ const Header = () => {
   };
 
   return (
-    <header className="py-6 bg-[url('/cover.jpg')] bg-cover bg-center">
+    // <header className="py-6 bg-[url('/cover.jpg')] bg-cover bg-center">
+    <header className="py-6 bg-[#2F476D] bg-cover bg-center">
       <div className="mx-auto max-w-screen-xl container">
         <div className="flex h-16 items-center justify-between">
           {/* اللوجو */}

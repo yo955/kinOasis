@@ -3,7 +3,8 @@ import TypingAnimation from "@/app/_components/lib/TypingAnimation";
 const HeroSection = () => {
   const shouldAnimate = true; 
   return (
-    <section className="w-full bg-[url('/cover.jpg')] bg-cover bg-center px-4 sm:px-16 lg:px-28 py-10">
+    // <section className="w-full bg-[url('/cover.jpg')] bg-cover bg-center px-4 sm:px-16 lg:px-28 py-10">
+    <section className="w-full bg-[#2F476D] bg-cover bg-center px-4 sm:px-16 lg:px-28 py-10">
       <div className="max-w-full mx-auto flex flex-col items-start">
         <TypingAnimation shouldAnimate={shouldAnimate} />
         <div className="w-full sm:w-[70%] lg:w-[63%] pt-[43px] pb-[30px]">

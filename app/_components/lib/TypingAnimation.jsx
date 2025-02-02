@@ -3,7 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 const TypingAnimation = ({ shouldAnimate }) => {
   const textRef = useRef(null);
-  const texts = ["أويسس"];
+  // const texts = ["أويسس"];
+  const texts = [""];
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -40,7 +41,7 @@ const TypingAnimation = ({ shouldAnimate }) => {
   return (
     <div className="flex">
       <h1 className="text-[3.5em] font-medium font-arabic sm:text-[6em] lg:text-[9.5em] text-[#f4f4f4] mr-4 ">
-        كن
+       كن أويسس
       </h1>
       <div
         ref={textRef}

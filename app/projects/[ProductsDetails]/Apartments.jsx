@@ -101,7 +101,8 @@ const Apartments = () => {
           </div>
         </div>
         <h1 className="text-3xl font-extrabold text-center text-blue-900">
-          حياة الرفاهية في قلب شمال العاصمة
+          {/* حياة الرفاهية في قلب شمال العاصمة */}
+          حياة الرفاهية في أجمل مدن المملكة
         </h1>
         <h2 className="text-2xl font-normal text-center leading-10 text-secondarycolor">
           استمتع بأسلوب حياة مترفة وفريدة من نوعها في مشروعنا السكني الفاخر،

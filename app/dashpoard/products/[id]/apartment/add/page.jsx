@@ -22,6 +22,7 @@ const AddApartmentPage = () => {
     status: "available",
     description: "",
     identity: "",
+    price:0,
     // video: [],
   });
 
@@ -199,6 +200,14 @@ const AddApartmentPage = () => {
             name="bathrooms"
             placeholder="Bathrooms"
             value={apartment.bathrooms}
+            onChange={handleChange}
+          />
+          <label>Price</label>
+          <input
+            type="number"
+            name="Price"
+            placeholder="Price"
+            value={apartment.price}
             onChange={handleChange}
           />
           <label>Status</label>

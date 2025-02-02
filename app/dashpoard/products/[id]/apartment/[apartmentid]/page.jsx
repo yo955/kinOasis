@@ -22,6 +22,7 @@ const SingleApartmentPage = () => {
     status: "",
     description: "",
     identity: "",
+    price:0,
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -169,6 +170,14 @@ const SingleApartmentPage = () => {
             name="bathrooms"
             placeholder="Bathrooms"
             value={apartment.bathrooms}
+            onChange={handleChange}
+          />
+          <label>Price</label>
+          <input
+            type="number"
+            name="Price"
+            placeholder="Price"
+            value={apartment.price}
             onChange={handleChange}
           />
           <label>Status</label>

@@ -12,7 +12,8 @@ module.exports = {
         arabic: ['DahabArabic', 'sans-serif'],
       },
       backgroundImage: {
-        "custom-image": "url('/cover2.jpeg')",
+        // "custom-image": "url('/cover2.jpeg')",
+        "background": "#2F476D",
       },
       colors: {
         background: "var(--background)",

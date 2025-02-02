@@ -6,7 +6,8 @@ import { FaWhatsapp } from "react-icons/fa6";
 import StaticBrochure from "@/app/_components/lib/StatickProfile";
 const Footer = () => {
   return (
-    <footer className="bg-[url('/cover.jpg')] bg-cover bg-center text-white py-20 ">
+    // <footer className="bg-[url('/cover.jpg')] bg-cover bg-center text-white py-20 ">
+    <footer className="bg-[#2F476D] bg-cover bg-center text-white py-20 ">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
         <div className="flex flex-col items-center order-3 md:order-1">
           <h3 className="text-xl font-bold font-arabic mb-4">تابعنا</h3>

@@ -69,34 +69,68 @@ const SingleProductPage = () => {
     console.log(product)
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const jwt = localStorage.getItem("jwt");
+  //   if (!jwt) {
+  //     toast.warn("Please log in to update the product.", {
+  //       position: "bottom-right",
+  //     });
+  //     return;
+  //   }
+  //   try {
+  //     await axios.patch(`${apiUrl}/compound/update/${product._id}`, product, {
+  //       withCredentials: true,
+  //       headers: {
+  //         Authorization: `Bearer ${jwt}`,
+  //       },
+  //     });
+  //     toast.success("Compound updated successfully!", {
+  //       position: "bottom-right",
+  //     });
+  //     window.location.pathname = window.location.pathname.split("/").slice(0,-1).join("/")
+  //   } catch (error) {
+  //     console.error("Error updating compound:", error);
+  //     toast.error("Failed to update compound.", {
+  //       position: "bottom-right",
+  //     });
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
-      toast.warn("Please log in to update the product.", {
-        position: "bottom-right",
-      });
+      toast.warn("Please log in to update the product.", { position: "bottom-right" });
       return;
     }
+  
+    const formData = new FormData();
+    Object.entries(product).forEach(([key, value]) => {
+      // تأكد من إرسال الملفات بشكل صحيح
+      if (key === "mainImage" && value instanceof File) {
+        formData.append(key, value);
+      } else {
+        formData.append(key, value);
+      }
+    });
+  
     try {
-      await axios.patch(`${apiUrl}/compound/update/${product._id}`, product, {
+      // await axios.patch(`${apiUrl}/compound/update/${product._id}`, formData, {
+      await axios.patch(`http://82.29.177.216:5000/compound/update/${product._id}`, formData, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${jwt}`,
+          "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("Compound updated successfully!", {
-        position: "bottom-right",
-      });
-      window.location.pathname = window.location.pathname.split("/").slice(0,-1).join("/")
+  
+      toast.success("Compound updated successfully!", { position: "bottom-right" });
+      // window.location.pathname = window.location.pathname.split("/").slice(0, -1).join("/");
     } catch (error) {
       console.error("Error updating compound:", error);
-      toast.error("Failed to update compound.", {
-        position: "bottom-right",
-      });
+      toast.error("Failed to update compound.", { position: "bottom-right" });
     }
   };
-
   if (isLoading) return <div>Loading...</div>;
   console.log(product.map);
 
@@ -104,10 +138,15 @@ const SingleProductPage = () => {
     <div className={styles.container}>
       <ToastContainer />
       <div>
-        <div className={`${styles.infoContainer}`}>
+
+
+
+
+
+        {/* <div className={`${styles.infoContainer}`}>
           <div className={`${styles.imgContainer}`}>
             <Image
-              src={product.mainImage ? product.mainImage : "/noavatar.png"}
+            src={product.mainImage ? `http://82.29.177.216:5000/uploads/${product._id}/images/${product.mainImage}`:"/noproduct.jpg"}
               alt="productImage"
               fill
               className={`${styles.userImg}`}
@@ -122,15 +161,71 @@ const SingleProductPage = () => {
               className=""
             />
           </div>
-        </div>
-        <div className="mt-5 p-3 flex flex-col justify-between items-center bg-blue-950 rounded-2xl">
+        </div> */}
+
+<div className={`${styles.infoContainer}`}>
+  <div className={`${styles.imgContainer}`}>
+    <Image
+      src={
+        product.mainImage instanceof File
+          ? URL.createObjectURL(product.mainImage) // عرض الصورة الجديدة
+          : product.mainImage
+          ? `http://82.29.177.216:5000/uploads/${product._id}/images/${product.mainImage}`
+          : "/noproduct.jpg"
+      }
+      alt="productImage"
+      fill
+      className={`${styles.userImg}`}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    />
+  </div>
+
+  <div className="flex justify-between items-center mt-3">
+    <label className="title">Main Image</label>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={(e) => {
+        const file = e.target.files[0];
+        if (file) {
+          setProduct((prev) => ({ ...prev, mainImage: file }));
+        }
+      }}
+    />
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        {/* <div className="mt-5 p-3 flex flex-col justify-between items-center bg-blue-950 rounded-2xl">
           <div className="title ">Edit PDf</div>
           <UploadCareButton
             setProduct={setProduct}
             uniqueKey={"pdf"}
             className="mt-3"
           />
-        </div>
+        </div> */}
+        <div className="mt-5 p-3 flex flex-col justify-between items-center bg-blue-950 rounded-2xl">
+  <div className="title">Edit PDF</div>
+  <input
+    type="file"
+    accept="application/pdf"
+    onChange={(e) => {
+      if (e.target.files?.[0]) {
+        setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
+      }
+    }}
+    className="mt-3"
+  />
+</div>
       </div>
 
       <div className={styles.formContainer}>

@@ -36,7 +36,7 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
           {translate(status.toLowerCase())}
         </span>
 
-        <div className="relative w-full h-56 bg-maincolor mx-auto">
+        {/* <div className="relative w-full h-56 bg-maincolor mx-auto">
           <Image
             src={imageUrl}
             alt="مشروع عقاري"
@@ -45,7 +45,7 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
             priority
             sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
           />
-        </div>
+        </div> */}
 
         <div className="py-2 px-2 bg-maincolor ">
           <div className="flex justify-between items-center mb-4 my-auto">

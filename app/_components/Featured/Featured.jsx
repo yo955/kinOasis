@@ -38,12 +38,12 @@ const Featured = () => {
       <AosWrapper key={index}>
         <div data-aos="zoom-in" key={item._id}>
           <Link prefetch={true} href={link}>
-            <Card
+            {/* <Card
               status={item.status}
               imageUrl={item.mainImage}
               location={item.location}
               projectTitle={item.title}
-            />
+            /> */}
           </Link>
         </div>
       </AosWrapper>

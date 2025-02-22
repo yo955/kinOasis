@@ -27,7 +27,7 @@ const LoginPage = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://real-state-liard.vercel.app/user/login",
+        "http://82.29.177.216:5000/user/login",
         {
           username,
           password,

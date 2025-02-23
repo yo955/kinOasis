@@ -118,7 +118,7 @@ const ProductsPage = () => {
                   <div className="test-for-image w-full">
                   <div className={styles.product}>
                     <Image
-                      src={product.mainImage ? `http://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`:"/noproduct.jpg"}
+                      src={product.mainImage ? `https://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`:"/noproduct.jpg"}
                       alt={product.title}
                       width={200}
                       height={200}

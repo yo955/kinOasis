@@ -91,7 +91,7 @@
 //               apartment.mainImage instanceof File
 //                 ? URL.createObjectURL(apartment.mainImage) // عرض الصورة الجديدة
 //                 : apartment.mainImage
-//                 ? `http://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${apartment.mainImage}`
+//                 ? `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${apartment.mainImage}`
 //                 : "/noproduct.jpg"
 //             }
 //             alt="Apartment Image"
@@ -331,7 +331,7 @@ const SingleApartmentPage = () => {
               apartment.mainImage instanceof File
                 ? URL.createObjectURL(apartment.mainImage)
                 : apartment.mainImage
-                ? `http://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${apartment.mainImage}`
+                ? `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${apartment.mainImage}`
                 : "/noproduct.jpg"
             }
             alt="Apartment Image"

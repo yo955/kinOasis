@@ -30,7 +30,7 @@ const CustomSwiper = ({ images,apartment }) => {
           src={
             image.src.startsWith("blob")
               ? image.src
-              : `http://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`
+              : `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`
              
           }
           alt={image.alt || `Slide ${index + 1}`}
@@ -41,9 +41,9 @@ const CustomSwiper = ({ images,apartment }) => {
       </SwiperSlide>
         // <SwiperSlide key={index}>
         //   <Image
-        //    //src= {`http://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`}
+        //    //src= {`https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`}
         //     src= { image instanceof File ? URL.createObjectURL(image)
-        //         : `http://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`}
+        //         : `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`}
         //     alt={image.alt || `Slide ${index + 1}`}
         //     width={300}
         //     height={300}

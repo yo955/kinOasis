@@ -116,7 +116,7 @@ const SingleProductPage = () => {
   
     try {
       // await axios.patch(`${apiUrl}/compound/update/${product._id}`, formData, {
-      await axios.patch(`http://kinoasis.online/compound/update/${product._id}`, formData, {
+      await axios.patch(`https://kinoasis.online/compound/update/${product._id}`, formData, {
         withCredentials: true,
         headers: {
           Authorization: `Bearer ${jwt}`,
@@ -146,7 +146,7 @@ const SingleProductPage = () => {
         {/* <div className={`${styles.infoContainer}`}>
           <div className={`${styles.imgContainer}`}>
             <Image
-            src={product.mainImage ? `http://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`:"/noproduct.jpg"}
+            src={product.mainImage ? `https://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`:"/noproduct.jpg"}
               alt="productImage"
               fill
               className={`${styles.userImg}`}
@@ -170,7 +170,7 @@ const SingleProductPage = () => {
         product.mainImage instanceof File
           ? URL.createObjectURL(product.mainImage) // عرض الصورة الجديدة
           : product.mainImage
-          ? `http://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`
+          ? `https://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`
           : "/noproduct.jpg"
       }
       alt="productImage"

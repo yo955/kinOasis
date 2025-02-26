@@ -10,7 +10,7 @@ const ApartmentCard = ({ apartment }) => {
 
         <div className="relative w-full h-56 ">
           <Image
-            src={apartment.mainImage}
+            src={`https://kinoasis.online/${apartment.mainImage}`}
             alt="مشروع عقاري"
             fill
             className="rounded-2xl p-2 object-cover"

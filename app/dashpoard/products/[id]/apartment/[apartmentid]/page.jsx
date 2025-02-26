@@ -331,7 +331,7 @@ const SingleApartmentPage = () => {
               apartment.mainImage instanceof File
                 ? URL.createObjectURL(apartment.mainImage)
                 : apartment.mainImage
-                ? `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${apartment.mainImage}`
+                ? `https://kinoasis.online/${apartment.mainImage}`
                 : "/noproduct.jpg"
             }
             alt="Apartment Image"

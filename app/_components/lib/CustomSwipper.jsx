@@ -27,10 +27,16 @@ const CustomSwiper = ({ images,apartment }) => {
         
         <SwiperSlide key={index}>
         <Image
+          // src={
+          //   image.src.startsWith("blob")
+          //     ? image.src
+          //     : `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`
+             
+          // }
           src={
             image.src.startsWith("blob")
               ? image.src
-              : `https://kinoasis.online/uploads/${apartment.compound}/${apartment._id}/images/${image.src}`
+              : `https://kinoasis.online/${image.src}`
              
           }
           alt={image.alt || `Slide ${index + 1}`}

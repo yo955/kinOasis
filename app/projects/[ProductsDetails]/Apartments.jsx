@@ -113,7 +113,7 @@ const Apartments = () => {
   className="rounded-lg object-contain w-full max-h-[600px] md:max-h-[600px] h-auto"
   style={{ maxWidth: "100%" }}
 >
-  <source src={compound?.video} type="video/mp4" />
+  <source src={`${compound?.video ? `https://kinoasis.online/${compound?.video}`:``}`} type="video/mp4" />
   <source src="movie.ogg" type="video/ogg" /> 
   Your browser does not support the video tag.
 </video>}

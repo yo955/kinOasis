@@ -170,7 +170,7 @@ const SingleProductPage = () => {
         product.mainImage instanceof File
           ? URL.createObjectURL(product.mainImage) // عرض الصورة الجديدة
           : product.mainImage
-          ? `https://kinoasis.online/uploads/${product._id}/images/${product.mainImage}`
+          ? `https://kinoasis.online/${product.mainImage}`
           : "/noproduct.jpg"
       }
       alt="productImage"

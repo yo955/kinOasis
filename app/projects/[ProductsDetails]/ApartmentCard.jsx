@@ -32,7 +32,7 @@ const ApartmentCard = ({ apartment }) => {
         <div className="relative block rounded-3xl border border-maincolor overflow-hidden shadow-lg">
           <div className="relative w-full h-56">
             <Image
-              src={apartment.mainImage}
+              src={`https://kinoasis.online/${apartment.mainImage}`}
               alt="مشروع عقاري"
               fill
               className="rounded-2xl p-2 bg-center bg-cover"
@@ -97,7 +97,7 @@ const ApartmentCard = ({ apartment }) => {
                 {/* الصورة الأساسية */}
                 <SwiperSlide>
                   <Image
-                    src={apartment.mainImage}
+                    src={`https://kinoasis.online/${apartment.mainImage}`}
                     alt="الصورة الرئيسية"
                     layout="responsive"
                     width={1920}
@@ -127,7 +127,7 @@ const ApartmentCard = ({ apartment }) => {
                       controls
                       className="rounded-lg object-contain md:p-14 md:py-[1.5rem] w-full h-[300px]"
                     >
-                      <source src={apartment.video} type="video/mp4" />
+                      <source src={`https://kinoasis.online/${apartment.video}`} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                   </SwiperSlide>
@@ -136,7 +136,7 @@ const ApartmentCard = ({ apartment }) => {
              </div>
             ) : (
               <Image
-                src={apartment.mainImage}
+                src={`https://kinoasis.online/${apartment.mainImage}`}
                 alt="الصورة الرئيسية"
                 layout="responsive"
                 width={1920}

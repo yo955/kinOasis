@@ -9,7 +9,7 @@ const HeroSection = () => {
     <section
       className="product-details relative bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${"https://kinoasis.online/"+image})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

@@ -23,7 +23,7 @@ export default function ProjectBrochure() {
   return (
     <div className="text-center mt-6">
       <Link
-        href={brochures}
+        href={`https://kinoasis.online/${brochures}`}
         target="_blank"
         rel="noopener noreferrer"
         className="bg-blue-900 w-40 h-10 font-arabic flex justify-center items-center hover:bg-blue-950 text-white font-bold py-2 px-4 rounded my-2 shadow-md shadow-blue-900"

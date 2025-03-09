@@ -115,6 +115,7 @@ const ApartmentPage = () => {
               <th className="border border-gray-300 px-4 py-2">Bathrooms</th>
               {/* <th className="border border-gray-300 px-4 py-2">Description</th> */}
               <th className="border border-gray-300 px-4 py-2">Status</th>
+              <th className="border border-gray-300 px-4 py-2">Price</th>
               <th className="border border-gray-300 px-4 py-2">Actions</th>
             </tr>
           </thead>
@@ -160,6 +161,9 @@ const ApartmentPage = () => {
                   </td> */}
                   <td className="border border-gray-300 px-4 py-2">
                     {apartment.status || "N/A"}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {apartment.price || 0}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     <div className={styles.buttons}>

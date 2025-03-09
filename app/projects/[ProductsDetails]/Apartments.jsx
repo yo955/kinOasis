@@ -21,7 +21,7 @@ const Apartments = () => {
 
   // حالات pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6; // عدد العناصر المعروضة في كل صفحة
+  const itemsPerPage = 9; // عدد العناصر المعروضة في كل صفحة
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   console.log(compound)

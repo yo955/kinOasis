@@ -9,6 +9,9 @@ import { MdOutlineBedroomParent } from "react-icons/md";
 import { LiaCampgroundSolid } from "react-icons/lia";
 import { MdOutlineHomeWork } from "react-icons/md";
 import { MdOutlineBathroom } from "react-icons/md";
+import { IoIosPricetags } from "react-icons/io";
+import { MdPriceChange } from "react-icons/md";
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -44,11 +47,19 @@ const ApartmentCard = ({ apartment }) => {
               <h3 className="text-2xl font-bold text-blue-900">
                 {apartment.identity}
               </h3>
-              <div className="flex items-center text-blue-900">
-                <h1 className="text-xl font-bold text-blue-900">
-                  {apartment.floor}
-                </h1>
-                <TbStairs className="text-2xl text-blue-900" />
+              <div className="flex justify-between items-center">
+                <div className="flex items-center text-blue-900">
+                  <h1 className="text-xl font-bold text-blue-900">
+                    {apartment.floor}
+                  </h1>
+                  <TbStairs className="text-2xl text-blue-900" />
+                </div>
+                <div className="flex items-center text-blue-900">
+                  <h1 className="text-xl font-bold text-blue-900">
+                    {apartment.price}
+                  </h1>
+                  <IoIosPricetags className="text-2xl text-blue-900" />
+                </div>
               </div>
               <div className="icon flex justify-between gap-5 pr-2">
                 <div className="flex items-center gap-2">
@@ -86,54 +97,57 @@ const ApartmentCard = ({ apartment }) => {
               &times;
             </button>
             {apartment.images.length > 0 || apartment.video ? (
-             <div className=" relative w-full sm:p-2 my-6 md:my-0">
-               <Swiper
-                modules={[Navigation]}
-                navigation
-                spaceBetween={10}
-                slidesPerView={1}
-                className="rounded-lg w-full h-auto"
-              >
-                {/* الصورة الأساسية */}
-                <SwiperSlide>
-                  <Image
-                    src={`https://kinoasis.online/${apartment.mainImage}`}
-                    alt="الصورة الرئيسية"
-                    layout="responsive"
-                    width={1920}
-                    height={1080}
-                    className="rounded-lg object-contain  w-full md:p-12  h-[300px] " 
-                  />
-                </SwiperSlide>
-
-                {/* الصور الإضافية */}
-                {apartment.images.map((image, index) => (
-                  <SwiperSlide key={`image-${index}`}>
+              <div className=" relative w-full sm:p-2 my-6 md:my-0">
+                <Swiper
+                  modules={[Navigation]}
+                  navigation
+                  spaceBetween={10}
+                  slidesPerView={1}
+                  className="rounded-lg w-full h-auto"
+                >
+                  {/* الصورة الأساسية */}
+                  <SwiperSlide>
                     <Image
-                      src={image}
-                      alt={`صورة إضافية ${index + 1}`}
+                      src={`https://kinoasis.online/${apartment.mainImage}`}
+                      alt="الصورة الرئيسية"
                       layout="responsive"
                       width={1920}
                       height={1080}
-                      className="rounded-lg object-contain w-full md:p-14  h-[300px]"
+                      className="rounded-lg object-contain  w-full md:p-12  h-[300px] "
                     />
                   </SwiperSlide>
-                ))}
 
-                {/* الفيديو الإضافي */}
-                {apartment.video && (
-                  <SwiperSlide>
-                    <video
-                      controls
-                      className="rounded-lg object-contain md:p-14 md:py-[1.5rem] w-full h-[300px]"
-                    >
-                      <source src={`https://kinoasis.online/${apartment.video}`} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                  </SwiperSlide>
-                )}
-              </Swiper>
-             </div>
+                  {/* الصور الإضافية */}
+                  {apartment.images.map((image, index) => (
+                    <SwiperSlide key={`image-${index}`}>
+                      <Image
+                        src={image}
+                        alt={`صورة إضافية ${index + 1}`}
+                        layout="responsive"
+                        width={1920}
+                        height={1080}
+                        className="rounded-lg object-contain w-full md:p-14  h-[300px]"
+                      />
+                    </SwiperSlide>
+                  ))}
+
+                  {/* الفيديو الإضافي */}
+                  {apartment.video && (
+                    <SwiperSlide>
+                      <video
+                        controls
+                        className="rounded-lg object-contain md:p-14 md:py-[1.5rem] w-full h-[300px]"
+                      >
+                        <source
+                          src={`https://kinoasis.online/${apartment.video}`}
+                          type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                      </video>
+                    </SwiperSlide>
+                  )}
+                </Swiper>
+              </div>
             ) : (
               <Image
                 src={`https://kinoasis.online/${apartment.mainImage}`}
@@ -147,7 +161,7 @@ const ApartmentCard = ({ apartment }) => {
             <div>
               <div class="flex items-center gap-2 text-black  justify-center flex-wrap">
                 <button class="flex flex-col p-1 cursor-pointer bg-white relative text-center  items-center justify-center gap-2  text-medium font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#06B6D4]  rounded-md px-3">
-                <MdOutlineBedroomParent color="#06B6D4" size={25}/>
+                  <MdOutlineBedroomParent color="#06B6D4" size={25} />
                   {/* <svg
                     class="lucide lucide-rocket text-cyan-500 dark:text-cyan-400"
                     stroke-linejoin="round"
@@ -185,7 +199,7 @@ const ApartmentCard = ({ apartment }) => {
                     <path d="M15 18h-5"></path>
                     <path d="M10 6h8v4h-8V6Z"></path>
                   </svg> */}
-                     <LiaCampgroundSolid color="#de9b4e"  size={25}/>
+                  <LiaCampgroundSolid color="#de9b4e" size={25} />
                   المساحه:{apartment.space}
                 </button>
                 <button class="flex flex-col p-1 cursor-pointer bg-white relative items-center justify-center gap-2 rounded-md text-medium font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[#59c165]   px-3">
@@ -204,34 +218,26 @@ const ApartmentCard = ({ apartment }) => {
                     <path d="M15.5 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3Z"></path>
                     <path d="M15 3v6h6"></path>
                   </svg> */}
-                   <MdOutlineHomeWork color="#59c165"  size={25}/>
+                  <MdOutlineHomeWork color="#59c165" size={25} />
                   الطابق:{apartment.floor}
                 </button>
                 <button class="flex flex-col p-1 cursor-pointer bg-white relative  items-center justify-center gap-2  text-medium font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[rgb(82,80,188)]  rounded-md px-3">
-                  {/* <svg
-                    class="lucide lucide-star text-orange-400 dark:text-orange-600"
-                    stroke-linejoin="round"
-                    stroke-linecap="round"
-                    stroke-width="2"
-                    stroke="#FB923C"
-                    fill="#FB923C"
-                    viewBox="0 0 24 24"
-                    height="22"
-                    width="22"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                  </svg> */}
-                 <MdOutlineBathroom color="rgb(82,80,188" size={25}/>
-
+                  <MdOutlineBathroom color="rgb(82,80,188" size={25} />
                   دورات المياه:{apartment.bathrooms}
+                </button>
+                <button class="flex flex-col p-1 cursor-pointer bg-white relative  items-center justify-center gap-2  text-medium font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-[#F5F5F5] hover:text-[rgb(82,80,188)]  rounded-md px-3">
+                  <MdPriceChange color="rgb(82,80,188" size={30} />
+                  سعر الوحدة :{apartment.price}
                 </button>
               </div>
             </div>
             <h1 className="text-2xl my-2 text-blue-900 text-center">
               التفاصيل الخاصة بالوحدة السكنية
             </h1>
-            <p className="text-secondarycolor flex flex-wrap text-center bg-maincolor" style={{overflowWrap:"anywhere"}}>
+            <p
+              className="text-secondarycolor flex flex-wrap text-center bg-maincolor"
+              style={{ overflowWrap: "anywhere" }}
+            >
               {apartment.description}
             </p>
           </div>

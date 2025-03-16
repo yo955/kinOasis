@@ -121,7 +121,8 @@ const ApartmentCard = ({ apartment }) => {
                   {apartment.images.map((image, index) => (
                     <SwiperSlide key={`image-${index}`}>
                       <Image
-                        src={image}
+                        // src={`https://kinoasis.online/${image}`}
+                        src={String(image).startsWith("uploads") ? `https://kinoasis.online/${image}`:`https://kinoasis.online/uploads/${apartment.compound+"/"+apartment._id}/images/${image}`}
                         alt={`صورة إضافية ${index + 1}`}
                         layout="responsive"
                         width={1920}

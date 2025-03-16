@@ -35,9 +35,8 @@ const CustomSwiper = ({ images,apartment }) => {
           // }
           src={
             image.src.startsWith("blob")
-              ? image.src
-              : `https://kinoasis.online/${image.src}`
-             
+              ? image.src:String(image.src).startsWith("uploads") ?
+               `https://kinoasis.online/${image.src}`:`https://kinoasis.online/uploads/${apartment.compound+"/"+apartment._id}/images/${image.src}`
           }
           alt={image.alt || `Slide ${index + 1}`}
           width={300}

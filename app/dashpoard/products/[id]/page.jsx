@@ -61,6 +61,7 @@ const SingleProductPage = () => {
     }));
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const jwt = localStorage.getItem("jwt");
@@ -141,9 +142,19 @@ const SingleProductPage = () => {
       <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
         <div className="title">Edit Video</div>
         {product.video && (
-          <video width="300" controls>
+          <div className="flex flex-col">
+            <video width="300" controls>
             <source src={`https://kinoasis.online/${product.video}`} type="video/mp4" />
           </video>
+          <button className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3" onClick={()=>{
+            setProduct((prev)=>({
+              ...prev,
+              video:""
+            }))
+           
+          }}>delete</button>
+          </div>
+        
         )}
         <input
           type="file"

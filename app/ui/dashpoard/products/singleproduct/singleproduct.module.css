@@ -10,7 +10,7 @@
   font-weight: bold;
   padding: 20px;
   border-radius: 10px;
-  height: max-content;
+  max-height: 400px;
   width: 280px;
 }
 .imgContainer {

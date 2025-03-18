@@ -32,8 +32,8 @@ const SingleProductPage = () => {
       .get(`${apiUrl}/compound/find/${id}`)
       .then((res) => {
         const productData = res.data;
-        const extractedMapSrc = extractSrc(productData.map);
-        setProduct({ ...productData, map: extractedMapSrc });
+        // const extractedMapSrc = extractSrc(productData.map);
+        setProduct({ ...productData});
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -43,25 +43,38 @@ const SingleProductPage = () => {
       });
   }, [id, apiUrl]);
 
-  const extractSrc = (input) => {
-    if (!input || !input.includes("src=")) return null;
-    try {
-      return input.split("src=")[1].split("/")[1]
-    } catch (error) {
-      console.error("Error extracting src:", error);
-      return null;
-    }
-  };
+  // const extractSrc = (input) => {
+  //   if (!input || !input.includes("src=")) return null;
+  //   try {
+  //     return input.split("src=")[1].split("/")[1]
+  //   } catch (error) {
+  //     console.error("Error extracting src:", error);
+  //     return null;
+  //   }
+  // };
 
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setProduct((prevProduct) => ({
+  //     ...prevProduct,
+  //     [name.toLowerCase()]: value,
+  //   }));
+  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name.toLowerCase()]: value,
-    }));
-  };
+    if (name === "map") {
+      String(value).startsWith("https")?setProduct({ ...product, map: value }):
+      setProduct({ ...product, map: value?.split(/src="/)[1]?.split('"')[0] });
+    } else {
 
-
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        [name.toLowerCase()]: value,
+      }));
+    }
+    console.log(product);
+  };
+  console.log(product.map)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const jwt = localStorage.getItem("jwt");
@@ -169,9 +182,19 @@ const SingleProductPage = () => {
       <form onSubmit={handleSubmit} style={{flex:1}} className={styles.form } >
         <label>Title</label>
         <input type="text" name="title" value={product.title} onChange={handleChange} />
+       
         <label>Location</label>
         <input type="text" name="location" value={product.location} onChange={handleChange} />
+        <label>Map</label>
+          <input
+            type="text"
+            name="map"
+            placeholder="Map"
+            value={product.map || ""}
+            onChange={handleChange}
+          />
         <label>Status</label>
+        
         <select name="status" value={product.status} onChange={handleChange}>
           <option value="available">Available</option>
           <option value="soon">Soon</option>

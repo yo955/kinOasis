@@ -8,11 +8,13 @@ import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { TbLoader2 } from "react-icons/tb";
+import SwiperImages from "@/app/_components/lib/SwipperImages";
 
 const SingleProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({
     mainImage: "",
+    images: [],
     title: "",
     location: "",
     status: "",
@@ -20,7 +22,7 @@ const SingleProductPage = () => {
     address: "",
     description: "",
     pdf: "",
-    video: "", // إضافة الفيديو
+    video: "",
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +34,6 @@ const SingleProductPage = () => {
       .get(`${apiUrl}/compound/find/${id}`)
       .then((res) => {
         const productData = res.data;
-        // const extractedMapSrc = extractSrc(productData.map);
         setProduct({ ...productData });
       })
       .catch((error) => {
@@ -43,23 +44,6 @@ const SingleProductPage = () => {
       });
   }, [id, apiUrl]);
 
-  // const extractSrc = (input) => {
-  //   if (!input || !input.includes("src=")) return null;
-  //   try {
-  //     return input.split("src=")[1].split("/")[1]
-  //   } catch (error) {
-  //     console.error("Error extracting src:", error);
-  //     return null;
-  //   }
-  // };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setProduct((prevProduct) => ({
-  //     ...prevProduct,
-  //     [name.toLowerCase()]: value,
-  //   }));
-  // };
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "map") {
@@ -123,27 +107,52 @@ const SingleProductPage = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
+  const handleRemoveMainImage = () => {
+    setProduct((prev) => ({ ...prev, mainImage: null }));
+  };
+  const handleRemoveImages = (index) => {
+    setProduct((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index), 
+    }));
+  };
+  
   return (
     <div className={styles.container}>
       <ToastContainer />
 
-      {/* PDF Upload */}
       <div className="flex flex-col">
         <div className={`${styles.infoContainer}`}>
-          <div className={`${styles.imgContainer}`}>
+          {product.mainImage ? (
+            <div className={`${styles.imgContainer}`}>
+              <button
+                onClick={handleRemoveMainImage}
+                className="absolute top-0 z-10 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+              >
+                ✕
+              </button>
+              <Image
+                src={
+                  product.mainImage instanceof File
+                    ? URL.createObjectURL(product.mainImage)
+                    : product.mainImage
+                    ? `https://kinoasis.online/${product.mainImage}`
+                    : "/noproduct.jpg"
+                }
+                alt="productImage"
+                fill
+                className={`${styles.userImg}`}
+              />
+            </div>
+          ) : (
             <Image
-              src={
-                product.mainImage instanceof File
-                  ? URL.createObjectURL(product.mainImage)
-                  : product.mainImage
-                  ? `https://kinoasis.online/${product.mainImage}`
-                  : "/noproduct.jpg"
-              }
-              alt="productImage"
-              fill
-              className={`${styles.userImg}`}
+              src="/noproduct.jpg"
+              alt="No Product"
+              width={250}
+              height={300}
+              className="absolute rounded-md bg-cover"
             />
-          </div>
+          )}
           <input
             type="file"
             accept="image/*"
@@ -153,6 +162,50 @@ const SingleProductPage = () => {
             }}
           />
         </div>
+        {/* Images */}
+        <div className={`${styles.infoContainer} mt-5`}>
+          <div className={`${styles.imgContainer}`}>
+            {product.images.length > 0 ? (
+              <SwiperImages
+                images={product.images || []}
+                handleRemoveImages={handleRemoveImages}
+              />
+            ) : (
+              <Image
+                src="/noproduct.jpg"
+                alt="No Product"
+                fill
+                className="absolute rounded-md bg-cover"
+              />
+            )}
+            {/* <Image
+              src={
+                product.images
+                  ? URL.createObjectURL(product.mainImage)
+                  : product.mainImage
+                  ? `https://kinoasis.online/${product.images}`
+                  : "/noproduct.jpg"
+              }
+              alt="productImage"
+              fill
+              className={`${styles.userImg}`}
+            /> */}
+          </div>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={(e) => {
+              const files = Array.from(e.target.files);
+              if (files.length > 0)
+                setProduct((prev) => ({
+                  ...prev,
+                  images: [...(prev.images || []), ...files],
+                }));
+            }}
+          />
+        </div>
+        {/* PDF Upload */}
         <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
           <div className="title">Edit PDF</div>
           <input

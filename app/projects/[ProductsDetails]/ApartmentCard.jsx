@@ -12,7 +12,6 @@ import { MdOutlineBathroom } from "react-icons/md";
 import { IoIosPricetags } from "react-icons/io";
 import { MdPriceChange } from "react-icons/md";
 
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 // Import Swiper styles
@@ -25,7 +24,31 @@ const ApartmentCard = ({ apartment }) => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+  const statusColors = {
+    متاح: "bg-green-600 ",
+    قريبا: "bg-yellow-500",
+    مباع: "bg-red-600",
+    available: "bg-green-600 ",
+    soon: "bg-yellow-500",
+    sold: "bg-red-600",
+  };
+  function translate(status) {
+    switch (status) {
+      case "available":
+        status = "متاح";
+        break;
+      case "soon":
+        status = "قريبا";
+        break;
+      case "sold":
+        status = "مباع";
+        break;
 
+      default:
+        break;
+    }
+    return status;
+  }
   return (
     <div>
       <div
@@ -33,6 +56,13 @@ const ApartmentCard = ({ apartment }) => {
         className="card hover:shadow-lg transition-all duration-150 w-full cursor-pointer font-arabic"
       >
         <div className="relative block rounded-3xl border border-maincolor overflow-hidden shadow-lg">
+          <span
+            className={`absolute w-1/4 text-center  justify-center inline-table items-center top-6 left-0 z-10 rounded-r-lg px-4 py-1 text-xl uppercase tracking-wide text-maincolor  ${
+              statusColors[apartment.status]
+            }`}
+          >
+            {translate(apartment.status.toLowerCase())}
+          </span>
           <div className="relative w-full h-56">
             <Image
               src={`https://kinoasis.online/${apartment.mainImage}`}
@@ -122,7 +152,13 @@ const ApartmentCard = ({ apartment }) => {
                     <SwiperSlide key={`image-${index}`}>
                       <Image
                         // src={`https://kinoasis.online/${image}`}
-                        src={String(image).startsWith("uploads") ? `https://kinoasis.online/${image}`:`https://kinoasis.online/uploads/${apartment.compound+"/"+apartment._id}/images/${image}`}
+                        src={
+                          String(image).startsWith("uploads")
+                            ? `https://kinoasis.online/${image}`
+                            : `https://kinoasis.online/uploads/${
+                                apartment.compound + "/" + apartment._id
+                              }/images/${image}`
+                        }
                         alt={`صورة إضافية ${index + 1}`}
                         layout="responsive"
                         width={1920}

@@ -106,3 +106,23 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
 button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-blue-900:hover {
   color: white;
 }        
+
+
+.image_main {
+  background-size: 70vw 90vh;
+  background-position: bottom;
+  background-repeat: no-repeat;
+
+}
+
+@media(max-width:768px){
+  .image_main {
+
+          background-repeat: no-repeat;
+        height: 400px;
+        width: 100%;
+        background-size: 100vw 400px;
+        background-position: bottom;
+  }
+  
+}

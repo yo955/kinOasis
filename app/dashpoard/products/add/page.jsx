@@ -51,17 +51,22 @@ const AddProductPage = () => {
       toast.error("Please log in to add the product.");
       return;
     }
-
     const formData = new FormData();
-    Object.entries(product).forEach(([key, value]) =>
-      formData.append(key, value)
-    );
+    Object.entries(product).forEach(([key, value]) => formData.append(key, value));
+
     if (mainImage) formData.append("mainImage", mainImage);
     if (video) formData.append("video", video);
     if (pdf) formData.append("pdf", pdf);
-    additionalImages.forEach((image) =>
-      formData.append("additionalImages", image)
-    );
+
+    if (additionalImages && Array.isArray(additionalImages)) {
+      additionalImages.forEach((image) => {
+        if (image instanceof File) {
+          formData.append("images", image);
+        }
+      });
+    }
+
+
 
     try {
       setIsLoading(true);
@@ -159,7 +164,9 @@ const AddProductPage = () => {
                 <div className="w-[400px] h-[180px] relative bg-slate-800">
                   {additionalImages.length > 0 ? (
                     <SwiperImages
-                      images={additionalImages}
+                      images={additionalImages.map((img) =>
+                        typeof img === "string" ? img : URL.createObjectURL(img)
+                      )}
                       handleRemoveImages={handleRemoveImages}
                     />
                   ) : (

@@ -70,7 +70,7 @@
 //       toast.success("Apartment updated successfully!");
 //       window.location.pathname = window.location.pathname.split("/").slice(0,-1).join("/")
 //     } catch (error) {
-      
+
 //       console.error("Error updating apartment:", error);
 //       toast.error("Failed to update apartment.");
 //     } finally {
@@ -331,8 +331,8 @@ const SingleApartmentPage = () => {
               apartment.mainImage instanceof File
                 ? URL.createObjectURL(apartment.mainImage)
                 : apartment.mainImage
-                ? `https://kinoasis.online/${apartment.mainImage}`
-                : "/noproduct.jpg"
+                  ? `https://kinoasis.online/${apartment.mainImage}`
+                  : "/noproduct.jpg"
             }
             alt="Apartment Image"
             width={300}
@@ -351,36 +351,22 @@ const SingleApartmentPage = () => {
 
         <div className={styles.imgContainer}>
           <label>Additional Images</label>
-          {/* {apartment.images.length > 0 ? (
+
+          {apartment.images.length > 0 ? (
             <CustomSwiper
               images={apartment.images.map((img) => ({
                 src: img instanceof File ? URL.createObjectURL(img) : img,
                 alt: "Apartment Image",
+                isFile: img instanceof File,
               }))}
               apartment={apartment}
             />
           ) : (
             <p>No Additional Images</p>
-          )} */}
-          {apartment.images.length > 0 ? (
-  <CustomSwiper
-    images={apartment.images.map((img) => ({
-      src: img instanceof File ? URL.createObjectURL(img) : img,
-      alt: "Apartment Image",
-      isFile: img instanceof File,
-    }))}
-    apartment={apartment}
-  />
-) : (
-  <p>No Additional Images</p>
-)}
-          <input type="file" multiple onChange={handleImagesChange} className="mt-5" />
-          <UploadCareButton
-            setProduct={setApartment}
-            uniqueKey={"images"}
-            isArray={true}
-            className={"mt-5"}
-          />
+          )}
+          <input type="file" multiple onChange={handleImagesChange} className="mt-5" setProduct={setApartment} />
+          {/* <UploadCareButton className={"mt-5"} />
+           */}
         </div>
       </div>
 

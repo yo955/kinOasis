@@ -1,10 +1,10 @@
 "use client";
+import Image from "next/image";
 import { useState } from "react";
 import { TbStairs } from "react-icons/tb";
 import { IoBedOutline } from "react-icons/io5";
 import { FaShower } from "react-icons/fa";
 import { RxBorderTop } from "react-icons/rx";
-import Image from "next/image";
 import { MdOutlineBedroomParent } from "react-icons/md";
 import { LiaCampgroundSolid } from "react-icons/lia";
 import { MdOutlineHomeWork } from "react-icons/md";

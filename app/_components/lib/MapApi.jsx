@@ -30,7 +30,6 @@ const MapApi = ({ width, radius, className }) => {
   if (error) {
     return <div className="text-red-500">Error: {error}</div>;
   }
-  console.log(map);
   
   return (
     <>

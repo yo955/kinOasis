@@ -1,18 +1,23 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
-const useGetCompounds = () => {
-  const [compounds, setCompounds] = useState([]);
+const useGetCompounds = (ProductsDetails) => {
+  const [compound, setCompound] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchData = async () => {
+      if (!ProductsDetails) return;
       try {
-        const response = await axios.get(`${apiURL}/compound`);
-        setCompounds(response.data);
+        const response = await axios.get(
+          `${apiURL}/compound/find/${ProductsDetails}`
+        );
+        console.log(response.data);
+
+        setCompound(response.data);
       } catch (err) {
         setError(err);
       } finally {
@@ -21,9 +26,9 @@ const useGetCompounds = () => {
     };
 
     fetchData();
-  }, []);
+  }, [ProductsDetails]);
 
-  return { compounds, loading, error };
+  return { compound, loading, error };
 };
 
 export default useGetCompounds;

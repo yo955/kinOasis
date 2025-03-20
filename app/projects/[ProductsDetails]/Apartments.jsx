@@ -24,7 +24,7 @@ const Apartments = () => {
   const itemsPerPage = 9; // عدد العناصر المعروضة في كل صفحة
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  console.log(compound)
+
   function getApartments() {
     setLoading(true);
     axios

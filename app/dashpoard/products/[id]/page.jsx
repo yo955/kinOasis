@@ -25,6 +25,7 @@ const SingleProductPage = () => {
     video: "",
   });
 
+
   const [isLoading, setIsLoading] = useState(true);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -50,9 +51,9 @@ const SingleProductPage = () => {
       String(value).startsWith("https")
         ? setProduct({ ...product, map: value })
         : setProduct({
-            ...product,
-            map: value?.split(/src="/)[1]?.split('"')[0],
-          });
+          ...product,
+          map: value?.split(/src="/)[1]?.split('"')[0],
+        });
     } else {
       setProduct((prevProduct) => ({
         ...prevProduct,
@@ -61,7 +62,6 @@ const SingleProductPage = () => {
     }
     console.log(product);
   };
-  console.log(product.map);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const jwt = localStorage.getItem("jwt");
@@ -73,8 +73,16 @@ const SingleProductPage = () => {
     }
 
     const formData = new FormData();
+
+    // إضافة كل القيم العادية
     Object.entries(product).forEach(([key, value]) => {
-      if (
+      if (key === "images" && Array.isArray(value)) {
+        value.forEach((img) => {
+          if (img instanceof File) {
+            formData.append("images", img);
+          }
+        });
+      } else if (
         (key === "mainImage" || key === "video" || key === "pdf") &&
         value instanceof File
       ) {
@@ -113,10 +121,10 @@ const SingleProductPage = () => {
   const handleRemoveImages = (index) => {
     setProduct((prev) => ({
       ...prev,
-      images: prev.images.filter((_, i) => i !== index), 
+      images: prev.images.filter((_, i) => i !== index),
     }));
   };
-  
+
   return (
     <div className={styles.container}>
       <ToastContainer />
@@ -136,8 +144,8 @@ const SingleProductPage = () => {
                   product.mainImage instanceof File
                     ? URL.createObjectURL(product.mainImage)
                     : product.mainImage
-                    ? `https://kinoasis.online/${product.mainImage}`
-                    : "/noproduct.jpg"
+                      ? `https://kinoasis.online/${product.mainImage}`
+                      : "/noproduct.jpg"
                 }
                 alt="productImage"
                 fill
@@ -167,7 +175,9 @@ const SingleProductPage = () => {
           <div className={`${styles.imgContainer}`}>
             {product.images.length > 0 ? (
               <SwiperImages
-                images={product.images || []}
+                images={product.images.map((img) =>
+                  typeof img === "string" ? img : URL.createObjectURL(img)
+                )}
                 handleRemoveImages={handleRemoveImages}
               />
             ) : (
@@ -178,18 +188,6 @@ const SingleProductPage = () => {
                 className="absolute rounded-md bg-cover"
               />
             )}
-            {/* <Image
-              src={
-                product.images
-                  ? URL.createObjectURL(product.mainImage)
-                  : product.mainImage
-                  ? `https://kinoasis.online/${product.images}`
-                  : "/noproduct.jpg"
-              }
-              alt="productImage"
-              fill
-              className={`${styles.userImg}`}
-            /> */}
           </div>
           <input
             type="file"
@@ -197,14 +195,17 @@ const SingleProductPage = () => {
             multiple
             onChange={(e) => {
               const files = Array.from(e.target.files);
-              if (files.length > 0)
+
+              if (files.length > 0) {
                 setProduct((prev) => ({
                   ...prev,
                   images: [...(prev.images || []), ...files],
                 }));
+              }
             }}
           />
         </div>
+
         {/* PDF Upload */}
         <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
           <div className="title">Edit PDF</div>

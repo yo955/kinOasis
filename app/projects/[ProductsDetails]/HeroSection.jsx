@@ -24,7 +24,7 @@ const HeroSection = () => {
               <SwiperSlide key={index}>
                 <div
                   className="h-screen w-full bg-cover bg-center"
-                  style={{ backgroundImage: `url(https://kinoasis.online/${img})` }}
+                  style={{ backgroundImage: `url(https://kinoasis.online/${img})`,backgroundSize:"contain",width:"100%",height:"100%",backgroundRepeat:"no-repeat" }}
                 />
               </SwiperSlide>
             )

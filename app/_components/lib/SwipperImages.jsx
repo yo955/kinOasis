@@ -14,12 +14,14 @@ export default function SwiperImages({ images, handleRemoveImages }) {
     <Swiper
       effect="cube"
       grabCursor={true}
+      
       cubeEffect={{
         shadow: true,
         slideShadows: true,
         shadowOffset: 20,
         shadowScale: 0.94,
       }}
+      
       pagination={true}
       modules={[EffectCube, Pagination]}
       className="mySwiper"
@@ -39,7 +41,7 @@ export default function SwiperImages({ images, handleRemoveImages }) {
             >
               ✕
             </button>
-            <Image src={imgSrc} alt={`Slide ${index + 1}`} width={500} height={500} className="mx-auto" unoptimized />
+            <Image src={imgSrc} alt={`Slide ${index + 1}`} width={500} height={500} className="mx-auto" unoptimized  style={{maxHeight:"350px",height:"100%"}}/>
           </SwiperSlide>
         );
       })}

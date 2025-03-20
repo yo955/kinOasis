@@ -126,10 +126,10 @@ const SingleProductPage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{display:"flex",flexDirection:"column"}}>
       <ToastContainer />
 
-      <div className="flex flex-col">
+      <div className="flex ">
         <div className={`${styles.infoContainer}`}>
           {product.mainImage ? (
             <div className={`${styles.imgContainer}`}>
@@ -206,8 +206,9 @@ const SingleProductPage = () => {
           />
         </div>
 
+        <div>
         {/* PDF Upload */}
-        <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+<div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
           <div className="title">Edit PDF</div>
           <input
             type="file"
@@ -219,7 +220,6 @@ const SingleProductPage = () => {
           />
         </div>
 
-        {/* Video Upload */}
         <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
           <div className="title">Edit Video</div>
           {product.video && (
@@ -252,6 +252,11 @@ const SingleProductPage = () => {
             }}
           />
         </div>
+        </div>
+        
+
+        {/* Video Upload */}
+       
       </div>
 
       <div className={styles.formContainer}>

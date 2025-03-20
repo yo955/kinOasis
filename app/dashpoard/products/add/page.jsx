@@ -157,6 +157,7 @@ const AddProductPage = () => {
                   <label className="my-5">Add Images</label>
                   <input
                     type="file"
+                    multiple
                     accept="image/*"
                     onChange={(e) => handleAdditionalImagesChange(e)}
                   />
@@ -180,6 +181,7 @@ const AddProductPage = () => {
                 </div>
               </div>
               {/* <<<<<<ImagesArray>>>>>> */}
+              <div>
               <div className="flex items-center justify-between">
                 <label className="my-5">Add Video</label>
                 <input
@@ -195,6 +197,7 @@ const AddProductPage = () => {
                   accept="application/pdf"
                   onChange={(e) => handleFileChange(e, setPdf)}
                 />
+              </div>
               </div>
             </div>
           </div>

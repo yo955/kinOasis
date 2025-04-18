@@ -132,7 +132,7 @@ const SingleProductPage = () => {
     <div className={styles.container} style={{ display: "flex", flexDirection: "column" }}>
       <ToastContainer />
 
-      <div className="flex ">
+      <div className="flex gap-5 items-center justify-between ">
         <div className={`${styles.infoContainer}`}>
           {product.mainImage ? (
             <div className={`${styles.imgContainer}`}>
@@ -174,7 +174,7 @@ const SingleProductPage = () => {
           />
         </div>
         {/* Images */}
-        <div className={`${styles.infoContainer} mt-5`}>
+        <div className={`${styles.infoContainer} `}>
           <div className={`${styles.imgContainer}`}>
             {product.images.length > 0 ? (
               <SwiperImages
@@ -208,10 +208,12 @@ const SingleProductPage = () => {
             }}
           />
         </div>
-
-        <div>
+        {/* Video Upload */}
+      </div>
+      
+      <div>
           {/* PDF Upload */}
-          <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+          <div className=" p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
             <div className="title">Edit PDF</div>
             <input
               type="file"
@@ -256,11 +258,6 @@ const SingleProductPage = () => {
             />
           </div>
         </div>
-
-
-        {/* Video Upload */}
-
-      </div>
 
       <div className={styles.formContainer}>
         <form

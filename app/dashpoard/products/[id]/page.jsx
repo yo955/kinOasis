@@ -71,15 +71,17 @@ const SingleProductPage = () => {
       });
       return;
     }
-
+  
     const formData = new FormData();
-
-    // إضافة كل القيم العادية
+  
     Object.entries(product).forEach(([key, value]) => {
       if (key === "images" && Array.isArray(value)) {
         value.forEach((img) => {
-          if (img instanceof File) {
-            formData.append("images", img);
+          // إذا كانت صورة قديمة (string URL) نضيفها كـ string
+          if (typeof img === "string") {
+            formData.append("existingImages", img); // نرسلها باسم مختلف مثلاً
+          } else if (img instanceof File) {
+            formData.append("images", img); // الصور الجديدة فقط
           }
         });
       } else if (
@@ -91,7 +93,7 @@ const SingleProductPage = () => {
         formData.append(key, value);
       }
     });
-
+  
     try {
       await axios.patch(
         `https://kinoasis.online/compound/update/${product._id}`,
@@ -112,6 +114,7 @@ const SingleProductPage = () => {
       toast.error("Failed to update compound.", { position: "bottom-right" });
     }
   };
+  
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -126,7 +129,7 @@ const SingleProductPage = () => {
   };
 
   return (
-    <div className={styles.container} style={{display:"flex",flexDirection:"column"}}>
+    <div className={styles.container} style={{ display: "flex", flexDirection: "column" }}>
       <ToastContainer />
 
       <div className="flex ">
@@ -207,56 +210,56 @@ const SingleProductPage = () => {
         </div>
 
         <div>
-        {/* PDF Upload */}
-<div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
-          <div className="title">Edit PDF</div>
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(e) => {
-              if (e.target.files?.[0])
-                setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
-            }}
-          />
+          {/* PDF Upload */}
+          <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+            <div className="title">Edit PDF</div>
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => {
+                if (e.target.files?.[0])
+                  setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
+              }}
+            />
+          </div>
+
+          <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+            <div className="title">Edit Video</div>
+            {product.video && (
+              <div className="flex flex-col">
+                <video width="300" controls>
+                  <source
+                    src={`https://kinoasis.online/${product.video}`}
+                    type="video/mp4"
+                  />
+                </video>
+                <button
+                  className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3"
+                  onClick={() => {
+                    setProduct((prev) => ({
+                      ...prev,
+                      video: "",
+                    }));
+                  }}
+                >
+                  delete
+                </button>
+              </div>
+            )}
+            <input
+              type="file"
+              accept="video/*"
+              onChange={(e) => {
+                if (e.target.files?.[0])
+                  setProduct((prev) => ({ ...prev, video: e.target.files[0] }));
+              }}
+            />
+          </div>
         </div>
 
-        <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
-          <div className="title">Edit Video</div>
-          {product.video && (
-            <div className="flex flex-col">
-              <video width="300" controls>
-                <source
-                  src={`https://kinoasis.online/${product.video}`}
-                  type="video/mp4"
-                />
-              </video>
-              <button
-                className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3"
-                onClick={() => {
-                  setProduct((prev) => ({
-                    ...prev,
-                    video: "",
-                  }));
-                }}
-              >
-                delete
-              </button>
-            </div>
-          )}
-          <input
-            type="file"
-            accept="video/*"
-            onChange={(e) => {
-              if (e.target.files?.[0])
-                setProduct((prev) => ({ ...prev, video: e.target.files[0] }));
-            }}
-          />
-        </div>
-        </div>
-        
 
         {/* Video Upload */}
-       
+
       </div>
 
       <div className={styles.formContainer}>

@@ -108,15 +108,15 @@ const Apartments = () => {
           استمتع بأسلوب حياة مترفة وفريدة من نوعها في مشروعنا السكني الفاخر،
           وحدات تمليك تجمع بين الرقي والراحة.
         </h2>
-    {compound.video &&     <video
-  controls
-  className="rounded-lg object-contain w-full max-h-[600px] md:max-h-[600px] h-auto"
-  style={{ maxWidth: "100%" }}
->
-  <source src={`${compound?.video ? `https://kinoasis.online/${compound?.video}`:``}`} type="video/mp4" />
-  <source src="movie.ogg" type="video/ogg" /> 
-  Your browser does not support the video tag.
-</video>}
+        {compound.video && <video
+          controls
+          className="rounded-lg object-contain w-full max-h-[600px] md:max-h-[600px] h-auto"
+          style={{ maxWidth: "100%" }}
+        >
+          <source src={`${compound?.video ? `https://kinoasis.online/${compound?.video}` : ``}`} type="video/mp4" />
+          <source src="movie.ogg" type="video/ogg" />
+          Your browser does not support the video tag.
+        </video>}
         <Link
           href="https://wa.me/966553810363"
           className="text-black transition hover:text-gray-500/75 text-xl"
@@ -131,7 +131,7 @@ const Apartments = () => {
         <h1 className="text-4xl font-extrabold mb-5 text-blue-900">الوحدات</h1>
       </div>
 
-      <div className={`cards grid grid-cols-1 gap-8 ${currentApartments.length ? "md:grid-cols-2 lg:grid-cols-3 lg:max-w-screen-lg":""} mx-auto text-black text-center font-bold text-[1.2rem]`}>
+      <div className={`cards grid grid-cols-1 gap-8 ${currentApartments.length ? "md:grid-cols-2 lg:grid-cols-3 lg:max-w-screen-lg" : ""} mx-auto text-black text-center font-bold text-[1.2rem]`}>
         {loading ? (
           <div>جاري التحميل...</div>
         ) : error ? (
@@ -151,9 +151,8 @@ const Apartments = () => {
           <button
             onClick={prevPage}
             disabled={currentPage === 1 || apartments.length === 0}
-            className={`btn-pagination border border-maincolor p-2 rounded-md shadow-md ${
-              currentPage === 1 || apartments.length === 0 ? "opacity-50" : ""
-            }`}
+            className={`btn-pagination border border-maincolor p-2 rounded-md shadow-md ${currentPage === 1 || apartments.length === 0 ? "opacity-50" : ""
+              }`}
           >
             السابق
           </button>
@@ -163,11 +162,10 @@ const Apartments = () => {
           <button
             onClick={nextPage}
             disabled={currentPage === totalPages || apartments.length === 0}
-            className={`btn-pagination border border-maincolor p-2 rounded-md shadow-md ${
-              currentPage === totalPages || apartments.length === 0
+            className={`btn-pagination border border-maincolor p-2 rounded-md shadow-md ${currentPage === totalPages || apartments.length === 0
                 ? "opacity-50"
                 : ""
-            }`}
+              }`}
           >
             التالي
           </button>

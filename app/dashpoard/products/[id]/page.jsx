@@ -76,12 +76,12 @@ const SingleProductPage = () => {
   
     Object.entries(product).forEach(([key, value]) => {
       if (key === "images" && Array.isArray(value)) {
+        // بنرسل كل الصور في نفس المفتاح سواء كانت جديدة أو قديمة
         value.forEach((img) => {
-          // إذا كانت صورة قديمة (string URL) نضيفها كـ string
           if (typeof img === "string") {
-            formData.append("existingImages", img); // نرسلها باسم مختلف مثلاً
+            formData.append("images", img); // خلي بالك، ده محتاج الباك إند يقبله كـ string
           } else if (img instanceof File) {
-            formData.append("images", img); // الصور الجديدة فقط
+            formData.append("images", img);
           }
         });
       } else if (
@@ -93,6 +93,7 @@ const SingleProductPage = () => {
         formData.append(key, value);
       }
     });
+    
   
     try {
       await axios.patch(

@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // init Swiper:
-const CustomSwiper = ({ images, apartment }) => {
+const CustomSwiper = ({ images, apartment, handleRemoveImages }) => {
   images.map((image, index) => {
     console.log(image.src.startsWith("blob"));
   });
@@ -25,6 +25,14 @@ const CustomSwiper = ({ images, apartment }) => {
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>
+          {handleRemoveImages && (
+            <button
+              onClick={() => handleRemoveImages(index)}
+              className="absolute top-0 z-10 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+            >
+              ✕
+            </button>
+          )}
           <Image
             src={
               image.src.startsWith("blob")

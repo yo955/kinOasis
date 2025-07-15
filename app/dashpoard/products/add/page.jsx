@@ -20,7 +20,7 @@ const AddProductPage = () => {
     status: "available",
     description: "",
     address: "",
-    map: "",
+    map: "kkk",
   });
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -243,12 +243,14 @@ const AddProductPage = () => {
             <option value="available">Available</option>
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
+            <option value="booked">booked</option>
           </select>
 
           <label>Map</label>
           <input
             type="text"
             name="map"
+
             placeholder="Map"
             value={product.map}
             onChange={handleChange}

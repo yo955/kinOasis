@@ -287,6 +287,7 @@ const SingleProductPage = () => {
             <option value="available">Available</option>
             <option value="soon">Soon</option>
             <option value="sold">Sold</option>
+            <option value="booked">booked</option>
           </select>
 
           <label>Map</label>

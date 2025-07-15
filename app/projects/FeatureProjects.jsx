@@ -83,6 +83,16 @@ const FeatureProjects = () => {
         >
           متاح
         </button>
+        <button
+          className={`px-4 py-2 rounded-md transition-all duration-300 ${
+            filter === "booked"
+              ? "bg-blue-900"
+              : "bg-gray-200 hover:bg-blue-900"
+          }`}
+          onClick={() => setFilter("booked")}
+        >
+          محجوز
+        </button>
       </div>
 
       {/* Cards grid */}

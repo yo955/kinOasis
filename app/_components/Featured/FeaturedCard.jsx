@@ -4,11 +4,13 @@ import Image from "next/image";
 const Card = ({ status, imageUrl, location, projectTitle }) => {
   const statusColors = {
     متاح: "bg-green-600 ",
-    قريبا: "bg-yellow-500",
+    قريبا: "bg-blue-500",
     مباع: "bg-red-600",
+    محجوز: "bg-orange-500",
     available: "bg-green-600 ",
-    soon: "bg-yellow-500",
+    soon: "bg-blue-500",
     sold: "bg-red-600",
+    booked: "bg-orange-500",
   };
   function translate(status) {
     switch (status) {
@@ -20,6 +22,9 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
         break;
       case "sold":
         status = "مباع";
+        break;
+      case "booked":
+        status = "محجوز";
         break;
 
       default:

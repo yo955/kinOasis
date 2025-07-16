@@ -34,19 +34,19 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
   }
   return (
     <div className="card transition-all duration-150 bg-transparent">
-      <div className="relative rounded-3xl  block border border-maincolor overflow-hidden font-arabic font-bold">
+      <div className="relative rounded-xl  block border border-maincolor overflow-hidden font-arabic font-bold">
         <span
           className={`absolute w-1/4 text-center  justify-center inline-table items-center top-6 left-0 z-10 rounded-r-lg px-4 py-1 text-xl uppercase tracking-wide text-maincolor  ${statusColors[status]}`}
         >
           {translate(status.toLowerCase())}
         </span>
 
-        <div className="relative w-full h-56 bg-maincolor mx-auto">
+        <div className="relative w-full  h-64 lg:h-80 bg-maincolor mx-auto">
           <Image
             src={`https://kinoasis.online/${imageUrl}`}
             alt="مشروع عقاري"
             fill
-            className="rounded-t-2xl object-cover bg-center"
+            className="rounded-t-2xl object-fill bg-center"
             priority
             sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
           />

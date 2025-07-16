@@ -121,8 +121,8 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
           background-repeat: no-repeat;
         height: 400px;
         width: 100%;
-        background-size: 100vw 400px;
-        background-position: bottom;
+        background-size: 90vw 300px;
+        background-position: center;
   }
   
 }

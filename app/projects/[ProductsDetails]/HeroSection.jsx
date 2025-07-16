@@ -23,7 +23,7 @@ const HeroSection = () => {
             img && ( // التحقق من أن `img` ليست null أو undefined
               <SwiperSlide key={index}>
                 <div
-                  className="h-screen w-full bg-cover bg-cente image_main"
+                  className="h-screen w-full bg-cover bg-center image_main"
                   style={{ backgroundImage: `url(https://kinoasis.online/${img})`,ackgroundSize:"contain",width:"100%",height:"100%",backgroundRepeat:"no-repeat"
                 }}
                 />

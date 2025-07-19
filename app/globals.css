@@ -112,7 +112,7 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
 
 @media (max-width: 767px) {
   .image_main {
-    height: 50vh;
+    height: 221px;
     width: 100%;
     background-size: 90vw 80%;
     background-position: center;

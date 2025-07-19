@@ -41,25 +41,30 @@ const Card = ({ status, imageUrl, location, projectTitle }) => {
           {translate(status.toLowerCase())}
         </span>
 
-        <div className="relative w-full  h-64 lg:h-80 bg-maincolor mx-auto">
+        <div
+          className="relative w-full overflow-hidden bg-maincolor rounded-t-2xl"
+          // style={{ height: "calc(100vw / 1.8)" }}
+        >
           <Image
             src={`https://kinoasis.online/${imageUrl}`}
             alt="مشروع عقاري"
-            fill
-            className="rounded-t-2xl object-fill bg-center"
+            width={800}
+            height={800 / 1.8}
+            className="object-contain w-full  bg-center"
             priority
-            sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
           />
         </div>
 
         <div className="py-2 px-2 bg-maincolor ">
           <div className="flex justify-between items-center mb-4 my-auto">
-            <h3 className="text-xl font-black text-blue-900 ">
+            <h3 className="text-lg sm:text-xl font-black text-blue-900 break-words leading-snug">
               {projectTitle}
             </h3>
+
             <div className="flex items-center font-black text-xl text-secondarycolor">
               <IoLocationSharp className="mr-1" />
-              <span>{location}</span>
+              <span className="break-words leading-snug">{location}</span>
+
             </div>
           </div>
         </div>

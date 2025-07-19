@@ -34,7 +34,10 @@ const FeatureProjects = () => {
   // تحديد المنتجات للصفحة الحالية
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredProducts.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   // حساب عدد الصفحات
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -45,9 +48,7 @@ const FeatureProjects = () => {
       <div className="flex flex-wrap justify-center items-center text-center mb-5 text-lg font-bold gap-4 font-arabic">
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300  ${
-            filter === "all"
-              ? "bg-blue-900"
-              : "bg-gray-200 hover:bg-blue-900"
+            filter === "all" ? "bg-blue-900" : "bg-gray-200 hover:bg-blue-900"
           }`}
           onClick={() => setFilter("all")}
         >
@@ -55,9 +56,7 @@ const FeatureProjects = () => {
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "sold"
-              ? "bg-blue-900"
-              : "bg-gray-200 hover:bg-blue-900"
+            filter === "sold" ? "bg-blue-900" : "bg-gray-200 hover:bg-blue-900"
           }`}
           onClick={() => setFilter("sold")}
         >
@@ -65,9 +64,7 @@ const FeatureProjects = () => {
         </button>
         <button
           className={`px-4 py-2 rounded-md transition-all duration-300 ${
-            filter === "soon"
-              ? "bg-blue-900"
-              : "bg-gray-200 hover:bg-blue-900"
+            filter === "soon" ? "bg-blue-900" : "bg-gray-200 hover:bg-blue-900"
           }`}
           onClick={() => setFilter("soon")}
         >
@@ -95,10 +92,10 @@ const FeatureProjects = () => {
         </button>
       </div>
 
-      {/* Cards grid */}
+      {/* Cards  */}
       <AosWrapper>
         <div data-aos="fade-up">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 font-arabic">
+          <div className="flex flex-wrap justify-start gap-2 md:gap-4 lg:gap-4">
             {currentItems.map((product) => {
               let link = "";
               if (product.status === "available" || product.status === "sold") {
@@ -106,7 +103,12 @@ const FeatureProjects = () => {
               }
 
               return (
-                <Link prefetch={true} href={link} key={product._id}>
+                <Link
+                  prefetch={true}
+                  href={link}
+                  key={product._id}
+                   className="project-card w-full md:w-[48%] "
+                >
                   <ProjectsCard
                     status={product.status}
                     imageUrl={product.mainImage}

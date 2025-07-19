@@ -18,14 +18,13 @@ const HeroSection = () => {
     <section className="product-details  relative bg-cover bg-center bg-no-repeat">
       {hasImages ? (
         // ✅ إذا كانت هناك صور، يتم عرض السلايدر ويشمل mainImage أولًا ثم باقي الصور
-        <Swiper navigation modules={[Navigation]} className="custom-swiper w-full md:h-screen h-[400px]">
+        <Swiper navigation modules={[Navigation]} className="custom-swiper  w-full ">
           {[mainImage, ...images].map((img, index) => (
             img && ( // التحقق من أن `img` ليست null أو undefined
               <SwiperSlide key={index}>
                 <div
                   className="h-screen w-full bg-cover bg-center image_main"
-                  style={{ backgroundImage: `url(https://kinoasis.online/${img})`,ackgroundSize:"contain",width:"100%",height:"100%",backgroundRepeat:"no-repeat"
-                }}
+                  style={{ backgroundImage: `url(https://kinoasis.online/${img})`,}}
                 />
               </SwiperSlide>
             )

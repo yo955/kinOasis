@@ -115,7 +115,14 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
-  height: calc(70vw / 1.82); 
+  height: 80vh; 
   margin: 1rem auto;
+}
+@media (max-width: 768px) {
+  .image_main {
+    height: 60vh; 
+    margin: 0.5rem auto;
+  }
+  
 }
 

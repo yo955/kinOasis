@@ -2,34 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 @font-face {
-  font-family: 'DahabArabic';
-  src: url('/fonts/arabic/DahabArabicITF-Medium.otf') format('opentype');
+  font-family: "DahabArabic";
+  src: url("/fonts/arabic/DahabArabicITF-Medium.otf") format("opentype");
   font-weight: 500; /* Medium */
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DahabArabic';
-  src: url('/fonts/arabic/DahabArabicITF-Bold.otf') format('opentype');
+  font-family: "DahabArabic";
+  src: url("/fonts/arabic/DahabArabicITF-Bold.otf") format("opentype");
   font-weight: 700; /* Bold */
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DahabArabic';
-  src: url('/fonts/arabic/DahabArabicITF-ExtraBold.otf') format('opentype');
+  font-family: "DahabArabic";
+  src: url("/fonts/arabic/DahabArabicITF-ExtraBold.otf") format("opentype");
   font-weight: 800; /* ExtraBold */
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'DahabArabic';
-  src: url('/fonts/arabic/DahabArabicITF-Black.otf') format('opentype');
+  font-family: "DahabArabic";
+  src: url("/fonts/arabic/DahabArabicITF-Black.otf") format("opentype");
   font-weight: 900; /* Black */
   font-style: normal;
 }
-
-
 
 a {
   color: inherit;
@@ -92,12 +90,11 @@ body {
   }
 }
 
-.test-for-image img{
+.test-for-image img {
   max-height: 290px;
   /* object-fit: contain; */
   width: 200px;
 }
-
 
 button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-blue-900 {
   color: black;
@@ -105,8 +102,7 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
 
 button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-blue-900:hover {
   color: white;
-}        
-
+}
 
 .image_main {
   background-size: 70vw 90vh;
@@ -114,14 +110,15 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
   background-repeat: no-repeat;
 }
 
-@media(max-width:767px){
+@media (max-width: 767px) {
   .image_main {
-        background-repeat: no-repeat;
-        height: 400px;
-        width: 100%;
-        background-size: 90vw 70%;
-        background-position: center;
-        object-fit: cover;
+    height: 50vh;
+    width: 100%;
+    background-size: 90vw 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    object-fit: contain;
+    background: round;
   }
 }
 @media (min-width: 768px) and (max-width: 920px) {
@@ -132,7 +129,5 @@ button.px-4.py-2.rounded-md.transition-all.duration-300.bg-gray-200.hover\:bg-bl
     background-position: center;
     object-fit: cover;
     margin: 50px 0;
-    
   }
-  
 }

@@ -25,7 +25,6 @@ const SingleProductPage = () => {
     video: "",
   });
 
-
   const [isLoading, setIsLoading] = useState(true);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -35,7 +34,17 @@ const SingleProductPage = () => {
       .get(`${apiUrl}/compound/find/${id}`)
       .then((res) => {
         const productData = res.data;
-        setProduct({ ...productData });
+
+        const formattedImages = Array.isArray(productData.images)
+          ? productData.images
+          : typeof productData.images === "string"
+          ? [productData.images]
+          : [];
+
+        setProduct({
+          ...productData,
+          images: formattedImages,
+        });
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -51,9 +60,25 @@ const SingleProductPage = () => {
       String(value).startsWith("https")
         ? setProduct({ ...product, map: value })
         : setProduct({
-          ...product,
-          map: value?.split(/src="/)[1]?.split('"')[0],
-        });
+            ...product,
+            map: value?.split(/src="/)[1]?.split('"')[0],
+          });
+    } else if (name === "images") {
+      // حماية: إذا المستخدم كتب سترينج أو لصق صور مفصولة بفاصلة
+      let imagesArr = value;
+      if (typeof value === "string") {
+        if (value.includes(",")) {
+          imagesArr = value.split(",").map((img) => img.trim());
+        } else if (value.includes(" ")) {
+          imagesArr = value.split(" ").map((img) => img.trim());
+        } else {
+          imagesArr = [value];
+        }
+      }
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        images: Array.isArray(imagesArr) ? imagesArr : [],
+      }));
     } else {
       setProduct((prevProduct) => ({
         ...prevProduct,
@@ -71,9 +96,11 @@ const SingleProductPage = () => {
       });
       return;
     }
-  
+
+    setIsLoading(true); // <-- أضف هذا السطر ليظهر اللودر
+
     const formData = new FormData();
-  
+
     Object.entries(product).forEach(([key, value]) => {
       if (key === "images" && Array.isArray(value)) {
         // بنرسل كل الصور في نفس المفتاح سواء كانت جديدة أو قديمة
@@ -93,8 +120,7 @@ const SingleProductPage = () => {
         formData.append(key, value);
       }
     });
-    
-  
+
     try {
       await axios.patch(
         `https://kinoasis.online/compound/update/${product._id}`,
@@ -113,9 +139,10 @@ const SingleProductPage = () => {
     } catch (error) {
       console.error("Error updating compound:", error);
       toast.error("Failed to update compound.", { position: "bottom-right" });
+    } finally {
+      setIsLoading(false); // <-- أضف هذا السطر ليختفي اللودر
     }
   };
-  
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -130,7 +157,10 @@ const SingleProductPage = () => {
   };
 
   return (
-    <div className={styles.container} style={{ display: "flex", flexDirection: "column" }}>
+    <div
+      className={styles.container}
+      style={{ display: "flex", flexDirection: "column" }}
+    >
       <ToastContainer />
 
       <div className="flex gap-5 items-center justify-between ">
@@ -148,8 +178,8 @@ const SingleProductPage = () => {
                   product.mainImage instanceof File
                     ? URL.createObjectURL(product.mainImage)
                     : product.mainImage
-                      ? `https://kinoasis.online/${product.mainImage}`
-                      : "/noproduct.jpg"
+                    ? `https://kinoasis.online/${product.mainImage}`
+                    : "/noproduct.jpg"
                 }
                 alt="productImage"
                 fill
@@ -179,9 +209,8 @@ const SingleProductPage = () => {
           <div className={`${styles.imgContainer}`}>
             {product.images.length > 0 ? (
               <SwiperImages
-                images={product.images.map((img) =>
-                  typeof img === "string" ? img : URL.createObjectURL(img)
-                )}
+                // مرر الصور كما هي (سترينج أو File)، وSwiperImages سيعالجها
+                images={product.images}
                 handleRemoveImages={handleRemoveImages}
               />
             ) : (
@@ -199,11 +228,19 @@ const SingleProductPage = () => {
             multiple
             onChange={(e) => {
               const files = Array.from(e.target.files);
-
+              // حماية: لا تدمج إلا إذا كل العناصر ملفات أو سترينج صورة
               if (files.length > 0) {
                 setProduct((prev) => ({
                   ...prev,
-                  images: [...(prev.images || []), ...files],
+                  images: [
+                    ...(Array.isArray(prev.images)
+                      ? prev.images.filter(
+                          (img) =>
+                            typeof img === "string" || img instanceof File
+                        )
+                      : []),
+                    ...files,
+                  ],
                 }));
               }
             }}
@@ -211,54 +248,54 @@ const SingleProductPage = () => {
         </div>
         {/* Video Upload */}
       </div>
-      
-      <div>
-          {/* PDF Upload */}
-          <div className=" p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
-            <div className="title">Edit PDF</div>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={(e) => {
-                if (e.target.files?.[0])
-                  setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
-              }}
-            />
-          </div>
 
-          <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
-            <div className="title">Edit Video</div>
-            {product.video && (
-              <div className="flex flex-col">
-                <video width="300" controls>
-                  <source
-                    src={`https://kinoasis.online/${product.video}`}
-                    type="video/mp4"
-                  />
-                </video>
-                <button
-                  className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3"
-                  onClick={() => {
-                    setProduct((prev) => ({
-                      ...prev,
-                      video: "",
-                    }));
-                  }}
-                >
-                  delete
-                </button>
-              </div>
-            )}
-            <input
-              type="file"
-              accept="video/*"
-              onChange={(e) => {
-                if (e.target.files?.[0])
-                  setProduct((prev) => ({ ...prev, video: e.target.files[0] }));
-              }}
-            />
-          </div>
+      <div>
+        {/* PDF Upload */}
+        <div className=" p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+          <div className="title">Edit PDF</div>
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={(e) => {
+              if (e.target.files?.[0])
+                setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
+            }}
+          />
         </div>
+
+        <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+          <div className="title">Edit Video</div>
+          {product.video && (
+            <div className="flex flex-col">
+              <video width="300" controls>
+                <source
+                  src={`https://kinoasis.online/${product.video}`}
+                  type="video/mp4"
+                />
+              </video>
+              <button
+                className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3"
+                onClick={() => {
+                  setProduct((prev) => ({
+                    ...prev,
+                    video: "",
+                  }));
+                }}
+              >
+                delete
+              </button>
+            </div>
+          )}
+          <input
+            type="file"
+            accept="video/*"
+            onChange={(e) => {
+              if (e.target.files?.[0])
+                setProduct((prev) => ({ ...prev, video: e.target.files[0] }));
+            }}
+          />
+        </div>
+      </div>
 
       <div className={styles.formContainer}>
         <form
@@ -315,7 +352,7 @@ const SingleProductPage = () => {
             onChange={handleChange}
             rows={5}
           ></textarea>
-          <button type="submit">
+          <button type="submit" disabled={isLoading}>
             {isLoading ? <TbLoader2 className="animate-spin" /> : "Update"}
           </button>
         </form>

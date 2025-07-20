@@ -8,31 +8,54 @@ import { EffectCube, Pagination } from "swiper/modules";
 import Image from "next/image";
 
 export default function SwiperImages({ images, handleRemoveImages }) {
-  console.log(images);
+  // حماية إضافية: إذا images سترينج فيه أكثر من صورة مفصولة بفاصلة أو مسافة
+  let safeImages = [];
+  if (Array.isArray(images)) {
+    safeImages = images.filter(
+      (img) => typeof img === "string" || img instanceof File
+    );
+  } else if (typeof images === "string") {
+    // إذا سترينج فيه أكثر من صورة مفصولة بفاصلة أو مسافة
+    if (images.includes(",")) {
+      safeImages = images.split(",").map((img) => img.trim());
+    } else if (images.includes(" ")) {
+      safeImages = images.split(" ").map((img) => img.trim());
+    } else {
+      safeImages = [images];
+    }
+  }
+  // فلترة أي عنصر ليس رابط صورة أو ملف
+  safeImages = safeImages.filter(
+    (img) =>
+      (typeof img === "string" && (img.endsWith(".jpg") || img.endsWith(".jpeg") || img.endsWith(".png") || img.endsWith(".webp") || img.startsWith("http") || img.startsWith("uploads/"))) ||
+      img instanceof File
+  );
+
+  console.log("Swiper images (safe):", safeImages);
 
   return (
     <Swiper
       effect="cube"
       grabCursor={true}
-      
       cubeEffect={{
         shadow: true,
         slideShadows: true,
         shadowOffset: 20,
         shadowScale: 0.94,
       }}
-      
       pagination={true}
       modules={[EffectCube, Pagination]}
       className="mySwiper"
     >
-        {images.map((img, index) => {
-        // تحويل المسار النسبي إلى رابط كامل
-        const imgSrc = img.startsWith("uploads")
-          ? `https://kinoasis.online/${img}`
-          : img;
+      {safeImages.map((img, index) => {
+        // ✅ معالجة الصور من السيرفر أو من File
+        const imgSrc =
+          typeof img === "string"
+            ? img.startsWith("http")
+              ? img
+              : `https://kinoasis.online/${img}`
+            : URL.createObjectURL(img);
 
-        console.log(`Image ${index}: ${imgSrc}`);
         return (
           <SwiperSlide key={index}>
             <button
@@ -41,7 +64,15 @@ export default function SwiperImages({ images, handleRemoveImages }) {
             >
               ✕
             </button>
-            <Image src={imgSrc} alt={`Slide ${index + 1}`} width={500} height={500} className="mx-auto" unoptimized  style={{maxHeight:"350px",height:"100%"}}/>
+            <Image
+              src={imgSrc}
+              alt={`Slide ${index + 1}`}
+              width={500}
+              height={500}
+              className="mx-auto"
+              unoptimized
+              style={{ maxHeight: "350px", height: "100%", objectFit: "cover" }}
+            />
           </SwiperSlide>
         );
       })}

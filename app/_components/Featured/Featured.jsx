@@ -28,16 +28,11 @@ const Featured = () => {
     fetchProducts();
   }, [apiUrl]);
 
-  const CardJsx = products.map((item, index) => {
-    const status = item.status;
-    let link = "";
-    if (status == "available" || status == "sold") {
-      link = `/projects/${item._id}?image=${item.mainImage}`;
-    }
+  const CardJsx = products.map((item, index) => {    
     return (
       <AosWrapper key={index}>
         <div data-aos="zoom-in" key={item._id}>
-          <Link prefetch={true} href={link}>
+          <Link prefetch={true} href={`/projects/${item._id}`}>
             <Card
               status={item.status}
               imageUrl={item.mainImage}

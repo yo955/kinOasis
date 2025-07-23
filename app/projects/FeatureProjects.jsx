@@ -97,17 +97,13 @@ const FeatureProjects = () => {
         <div data-aos="fade-up">
           <div className="flex flex-wrap justify-start gap-2 md:gap-4 lg:gap-4">
             {currentItems.map((product) => {
-              let link = "";
-              if (product.status === "available" || product.status === "sold") {
-                link = `/projects/${product._id}?image=${product.mainImage}`;
-              }
-
+             
               return (
                 <Link
                   prefetch={true}
-                  href={link}
+                  href={`/projects/${product._id}`}
                   key={product._id}
-                   className="project-card w-full md:w-[48%] "
+                   className="project-card w-full md:w-[38%] "
                 >
                   <ProjectsCard
                     status={product.status}

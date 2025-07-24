@@ -13,15 +13,13 @@
 // };
 
 const nextConfig = {
-  images: {
+ images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "**", // السماح بأي دومين HTTP
-      },
-      {
         protocol: "https",
-        hostname: "**", // السماح بأي دومين HTTPS
+        hostname: "kinoasis.online",
+        port: "",
+        pathname: "/uploads/**",
       },
     ],
   },

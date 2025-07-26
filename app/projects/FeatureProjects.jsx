@@ -103,7 +103,7 @@ const FeatureProjects = () => {
                   prefetch={true}
                   href={`/projects/${product._id}`}
                   key={product._id}
-                   className="project-card w-full md:w-[38%] "
+                   className="project-card w-full md:w-[32%] "
                 >
                   <ProjectsCard
                     status={product.status}

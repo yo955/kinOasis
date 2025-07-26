@@ -40,14 +40,15 @@ const HeroSection = () => {
           )}
         </Swiper>
       ) : (
-        <Image
-          src={`https://kinoasis.online/${compound.mainImage}`}
-          alt={compound?.title}
-          width={1000}
-          height={1000}
-          className="object-contain"
-          priority
-        />
+        <div className="image_main relative w-full h-full">
+          <Image
+            src={`https://kinoasis.online/${compound.mainImage}`}
+            alt={compound?.title}
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
       )}
     </section>
   );

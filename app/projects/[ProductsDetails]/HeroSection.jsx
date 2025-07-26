@@ -43,7 +43,8 @@ const HeroSection = () => {
         <Image
           src={`https://kinoasis.online/${compound.mainImage}`}
           alt={compound?.title}
-          fill
+          width={1000}
+          height={1000}
           className="object-contain"
           priority
         />

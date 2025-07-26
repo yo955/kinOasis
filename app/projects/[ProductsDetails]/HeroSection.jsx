@@ -4,39 +4,48 @@ import { useParams } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
-import "./swiper.css"
+import "./swiper.css";
+import Image from "next/image";
 const HeroSection = () => {
   const { ProductsDetails } = useParams();
   const { compound } = useGetCompounds(ProductsDetails);
 
-  if (!compound) return null; 
+  if (!compound) return null;
 
   const { mainImage, images } = compound || {};
   const hasImages = images && images.length > 0;
 
   return (
-    <section className="product-details  relative bg-cover bg-center bg-no-repeat">
+    <section className="relative md:h-screen mb-10 bg-cover bg-center bg-no-repeat border-b-4 border-[#324B71]/20">
       {hasImages ? (
-        // ✅ إذا كانت هناك صور، يتم عرض السلايدر ويشمل mainImage أولًا ثم باقي الصور
-        <Swiper navigation modules={[Navigation]} className="custom-swiper  w-full ">
-          {[mainImage, ...images].map((img, index) => (
-            img && ( // التحقق من أن `img` ليست null أو undefined
-              <SwiperSlide key={index}>
-                <div
-                  className="h-screen w-full bg-cover bg-center image_main"
-                  style={{ backgroundImage: `url(https://kinoasis.online/${img})`,}}
-                />
-              </SwiperSlide>
-            )
-          ))}
+        <Swiper
+          navigation
+          modules={[Navigation]}
+          className="custom-swiper  w-full "
+        >
+          {[mainImage, ...images].map(
+            (img, index) =>
+              img && (
+                <SwiperSlide key={index}>
+                  <Image
+                    src={`https://kinoasis.online/${img}`}
+                    alt={`Compound Image ${index + 1}`}
+                    width={1000}
+                    height={1000}
+                    className="image_main"
+                    priority
+                  />
+                </SwiperSlide>
+              )
+          )}
         </Swiper>
       ) : (
-        // ✅ إذا لم تكن هناك صور داخل `images[]`، يتم عرض `mainImage` فقط
-        <div
-          className="h-screen w-full bg-cover bg-center image_main"
-          style={{
-            backgroundImage: mainImage ? `url(https://kinoasis.online/${mainImage})` : "none",
-          }}
+        <Image
+          src={`https://kinoasis.online/${compound.mainImage}`}
+          alt={compound?.title}
+          fill
+          className="object-contain"
+          priority
         />
       )}
     </section>

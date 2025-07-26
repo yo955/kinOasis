@@ -19,7 +19,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "kinoasis.online",
         port: "",
-        pathname: "/uploads/**",
+        pathname: "/**",
       },
     ],
   },

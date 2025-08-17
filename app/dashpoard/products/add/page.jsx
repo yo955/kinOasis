@@ -1,10 +1,9 @@
 "use client";
 import styles from "@/app/ui/dashpoard/products/addproduct/addproduct.module.css";
 import axios from "axios";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image";
 import { TbLoader2 } from "react-icons/tb";
 import SwiperImages from "@/app/_components/lib/SwipperImages";
 
@@ -66,8 +65,6 @@ const AddProductPage = () => {
       });
     }
 
-
-
     try {
       setIsLoading(true);
       await axios.post(`${apiUrl}/compound/add`, formData, {
@@ -99,9 +96,11 @@ const AddProductPage = () => {
       setIsLoading(false);
     }
   };
+
   const handleRemoveMainImage = () => {
     setMainImage(null);
   };
+
   const handleRemoveImages = (index) => {
     setAdditionalImages((prev) => prev.filter((_, i) => i !== index));
   };
@@ -132,19 +131,17 @@ const AddProductPage = () => {
                       >
                         ✕
                       </button>
-                      <Image
+                      <img
                         src={URL.createObjectURL(mainImage)}
                         alt="Main Image"
-                        fill
-                        className="absolute rounded-md bg-cover"
+                        className="absolute w-full h-full object-cover rounded-md"
                       />
                     </>
                   ) : (
-                    <Image
+                    <img
                       src="/noproduct.jpg"
                       alt="No Product"
-                      fill
-                      className="absolute rounded-md bg-cover"
+                      className="absolute w-full h-full object-cover rounded-md"
                     />
                   )}
                 </div>
@@ -171,50 +168,36 @@ const AddProductPage = () => {
                       handleRemoveImages={handleRemoveImages}
                     />
                   ) : (
-                    <Image
+                    <img
                       src="/noproduct.jpg"
                       alt="No Product"
-                      fill
-                      className="absolute rounded-md bg-cover"
+                      className="absolute w-full h-full object-cover rounded-md"
                     />
                   )}
                 </div>
               </div>
               {/* <<<<<<ImagesArray>>>>>> */}
+
               <div>
-              <div className="flex items-center justify-between">
-                <label className="my-5">Add Video</label>
-                <input
-                  type="file"
-                  accept="video/*"
-                  onChange={(e) => handleFileChange(e, setVideo)}
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <label className="my-5">Add PDF</label>
-                <input
-                  type="file"
-                  accept="application/pdf"
-                  onChange={(e) => handleFileChange(e, setPdf)}
-                />
-              </div>
+                <div className="flex items-center justify-between">
+                  <label className="my-5">Add Video</label>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={(e) => handleFileChange(e, setVideo)}
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <label className="my-5">Add PDF</label>
+                  <input
+                    type="file"
+                    accept="application/pdf"
+                    onChange={(e) => handleFileChange(e, setPdf)}
+                  />
+                </div>
               </div>
             </div>
           </div>
-
-          {/* <div className="flex flex-wrap gap-2 mt-4">
-            {additionalImages.map((image, index) => (
-              <div key={index} className="relative">
-                <Image
-                  src={URL.createObjectURL(image)}
-                  alt={`Additional image ${index + 1}`}
-                  width={100}
-                  height={100}
-                  className="rounded"
-                />
-              </div>
-            ))}
-          </div> */}
         </div>
       </section>
 
@@ -250,7 +233,6 @@ const AddProductPage = () => {
           <input
             type="text"
             name="map"
-
             placeholder="Map"
             value={product.map}
             onChange={handleChange}

@@ -1,31 +1,30 @@
 import React from "react";
 import AboutCard from "./AboutCard";
-import { FaHouse } from "react-icons/fa6";
 import AosWrapper from "../_components/lib/ScrollAnimation";
 import Link from "next/link";
-import Image from "next/image";
+
 const FeatureAbout = () => {
   const CardContent = [
     {
       title: "تصاميم عصرية",
       description: "نقدم تصاميم تجمع بين الإبداع والوظائف العملية",
-      Icon: <Image src="/1.png" alt="icon" width={80} height={80} />,
+      Icon: <img src="/1.png" alt="icon" width={80} height={80} className="object-contain" />,
     },
     {
       title: "جودة استثنائية",
       description:
         "نلتزم بأعلى معايير الجودة في جميع جوانب مشاريعنا، من التصميم إلى التنفيذ",
-      Icon: <Image src="/2.png" alt="icon" width={80} height={80} />,
+      Icon: <img src="/2.png" alt="icon" width={80} height={80} className="object-contain" />,
     },
     {
       title: "بيئة متكاملة",
       description: "نبني مجتمعات متكاملة توفر المرافق والخدمات لحياة ميسرة",
-      Icon: <Image src="/3.png" alt="icon" width={80} height={80} />,
+      Icon: <img src="/3.png" alt="icon" width={80} height={80} className="object-contain" />,
     },
     {
       title: "تجربة سكن فريدة",
       description: "نسعى لتقديم تجربة سكن تجمع بين الاسترخاء والتميز",
-      Icon: <Image src="/4.png" alt="icon" width={80} height={80} />,
+      Icon: <img src="/4.png" alt="icon" width={80} height={80} className="object-contain" />,
     },
   ];
 
@@ -63,7 +62,7 @@ const FeatureAbout = () => {
               </div>
               <Link prefetch={true} href="/projects">
                 <button className="text-maincolor bg-blue-900 rounded-xl py-2 px-4 mt-2 lg:w-40 md:py-3 md:px-4 border text-xl font-bold">
-                 لرؤية مشاريعنا
+                  لرؤية مشاريعنا
                 </button>
               </Link>
             </div>

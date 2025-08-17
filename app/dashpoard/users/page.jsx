@@ -1,8 +1,8 @@
 import Pagination from "@/app/ui/dashpoard/pagination/Pagination";
 import Search from "@/app/ui/dashpoard/search/Search";
 import styles from "@/app/ui/dashpoard/users/users.module.css";
-import Image from "next/image";
 import Link from "next/link";
+
 const UsersPage = () => {
   return (
     <div className={styles.container}>
@@ -27,14 +27,14 @@ const UsersPage = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image
+                <img
                   src="/noavatar.png"
                   alt="avatar"
                   width={40}
                   height={40}
                   className={styles.userImage}
                 />
-               test
+                test
               </div>
             </td>
             <td>test@gmail.com</td>

@@ -1,10 +1,9 @@
 "use client";
 import styles from "@/app/ui/dashpoard/products/singleproduct/apartment/addapartment/addapartment.module.css";
 import axios from "axios";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image";
 import CustomSwiper from "@/app/_components/lib/CustomSwipper";
 import { useParams } from "next/navigation";
 import { TbLoader2 } from "react-icons/tb";
@@ -68,7 +67,7 @@ const AddApartmentPage = () => {
 
     try {
       setisloading(true);
-      const response = await axios.post(`${apiUrl}/apartment/add/${id}`, formData, {
+      await axios.post(`${apiUrl}/apartment/add/${id}`, formData, {
         headers: {
           Authorization: `Bearer ${jwt}`,
           "Content-Type": "multipart/form-data",
@@ -91,11 +90,9 @@ const AddApartmentPage = () => {
         <div className={`${styles.imgContainer}`}>
           <label>Main Image</label>
           {apartment.mainImage ? (
-            <Image
+            <img
               src={URL.createObjectURL(apartment.mainImage)}
               alt="Main Apartment Image"
-              width={300}
-              height={300}
               className={styles.userImg}
             />
           ) : (

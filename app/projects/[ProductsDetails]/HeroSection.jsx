@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Navigation } from "swiper/modules";
 import "./swiper.css";
-import Image from "next/image";
+
 const HeroSection = () => {
   const { ProductsDetails } = useParams();
   const { compound } = useGetCompounds(ProductsDetails);
@@ -21,19 +21,17 @@ const HeroSection = () => {
         <Swiper
           navigation
           modules={[Navigation]}
-          className="custom-swiper  w-full "
+          className="custom-swiper w-full"
         >
           {[mainImage, ...images].map(
             (img, index) =>
               img && (
                 <SwiperSlide key={index}>
-                  <Image
+                  <img
                     src={`https://kinoasis.online/${img}`}
                     alt={`Compound Image ${index + 1}`}
-                    width={1000}
-                    height={1000}
                     className="image_main"
-                    priority
+                    loading="lazy"
                   />
                 </SwiperSlide>
               )
@@ -41,12 +39,11 @@ const HeroSection = () => {
         </Swiper>
       ) : (
         <div className="image_main relative w-full h-full">
-          <Image
+          <img
             src={`https://kinoasis.online/${compound.mainImage}`}
             alt={compound?.title}
-            fill
-            className="object-contain"
-            priority
+            className="object-contain w-full h-full"
+            loading="lazy"
           />
         </div>
       )}

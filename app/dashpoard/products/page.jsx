@@ -1,7 +1,6 @@
 "use client";
 import styles from "@/app/ui/dashpoard/products/products.module.css";
 import Link from "next/link";
-import Image from "next/image";
 import Search from "@/app/ui/dashpoard/search/Search";
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
@@ -29,7 +28,7 @@ const ProductsPage = () => {
       .get(`${apiUrl}/compound`)
       .then((response) => {
         setCompound(response.data);
-        setTotalPages(Math.ceil(response.data.length / itemsPerPage)); // حساب عدد الصفحات الإجمالية
+        setTotalPages(Math.ceil(response.data.length / itemsPerPage));
         setIsLoading(false);
       })
       .catch((error) => {
@@ -39,7 +38,6 @@ const ProductsPage = () => {
       });
   }, [apiUrl]);
 
-  // تصفية المنتجات بناءً على الصفحة الحالية
   const paginatedProducts = compound.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -116,16 +114,17 @@ const ProductsPage = () => {
               <tr key={product._id}>
                 <td>
                   <div className="test-for-image w-full">
-                  <div className={styles.product}>
-                    <Image
-                      src={product.mainImage ? `https://kinoasis.online/${product.mainImage}`:"/noproduct.jpg"}
-                      alt={product.title}
-                      width={200}
-                      height={200}
-                      className={styles.productImage }
-                   
-                    />
-                  </div>
+                    <div className={styles.product}>
+                      <img
+                        src={
+                          product.mainImage
+                            ? `https://kinoasis.online/${product.mainImage}`
+                            : "/noproduct.jpg"
+                        }
+                        alt={product.title}
+                        className={styles.productImage}
+                      />
+                    </div>
                   </div>
                 </td>
                 <td>{product.title}</td>
@@ -156,6 +155,7 @@ const ProductsPage = () => {
           )}
         </tbody>
       </table>
+
       {/* الترقيم اليدوي */}
       <div className="flex items-center justify-between">
         <div>

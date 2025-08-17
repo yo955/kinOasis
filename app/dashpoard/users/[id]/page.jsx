@@ -1,14 +1,13 @@
 import styles from "@/app/ui/dashpoard/users/singleuser/SingleUser.module.css";
-import Image from "next/image";
+
 const SingleUserPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image
+          <img
             src="/noavatar.png"
             alt="avatar"
-            fill
             className={styles.userImg}
           />
         </div>

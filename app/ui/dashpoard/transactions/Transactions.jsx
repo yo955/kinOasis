@@ -1,5 +1,4 @@
 import styles from "./transactions.module.css";
-import Image from "next/image";
 
 const Transactions = () => {
   return (
@@ -18,12 +17,13 @@ const Transactions = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image
+                <img
                   src="/noavatar.png"
                   alt="avatarImage"
                   width={40}
                   height={40}
                   className={styles.userImage}
+                  loading="lazy"
                 />
                 Joo
               </div>
@@ -41,12 +41,13 @@ const Transactions = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image
-                 src="/noavatar.png"
+                <img
+                  src="/noavatar.png"
                   alt="avatarImage"
                   width={40}
                   height={40}
                   className={styles.userImage}
+                  loading="lazy"
                 />
                 Joo
               </div>
@@ -62,12 +63,13 @@ const Transactions = () => {
           <tr>
             <td>
               <div className={styles.user}>
-                <Image
+                <img
                   src="/noavatar.png"
                   alt="avatarImage"
                   width={40}
                   height={40}
                   className={styles.userImage}
+                  loading="lazy"
                 />
                 Joo
               </div>

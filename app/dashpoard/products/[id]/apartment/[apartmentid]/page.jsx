@@ -1,7 +1,6 @@
 "use client";
 import styles from "@/app/ui/dashpoard/products/singleproduct/apartment/singleapartment/singleapartment.module.css";
 import axios from "axios";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
@@ -128,7 +127,7 @@ const SingleApartmentPage = () => {
                 ✕
               </button>
             )}
-            <Image
+            <img
               src={
                 apartment.mainImage instanceof File
                   ? URL.createObjectURL(apartment.mainImage)
@@ -137,10 +136,7 @@ const SingleApartmentPage = () => {
                   : "/noproduct.jpg"
               }
               alt="Apartment Image"
-              width={300}
-              height={300}
-              className={styles.userImg}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className={`${styles.userImg} w-[300px] h-[300px] object-cover`}
             />
           </div>
           <input
@@ -179,8 +175,6 @@ const SingleApartmentPage = () => {
             className="mt-5"
             setProduct={setApartment}
           />
-          {/* <UploadCareButton className={"mt-5"} />
-           */}
         </div>
       </div>
 

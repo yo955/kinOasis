@@ -5,7 +5,6 @@ import "swiper/css";
 import "swiper/css/effect-cube";
 import "swiper/css/pagination";
 import { EffectCube, Pagination } from "swiper/modules";
-import Image from "next/image";
 
 export default function SwiperImages({ images, handleRemoveImages }) {
   // حماية إضافية: إذا images سترينج فيه أكثر من صورة مفصولة بفاصلة أو مسافة
@@ -24,10 +23,17 @@ export default function SwiperImages({ images, handleRemoveImages }) {
       safeImages = [images];
     }
   }
+
   // فلترة أي عنصر ليس رابط صورة أو ملف
   safeImages = safeImages.filter(
     (img) =>
-      (typeof img === "string" && (img.endsWith(".jpg") || img.endsWith(".jpeg") || img.endsWith(".png") || img.endsWith(".webp") || img.startsWith("http") || img.startsWith("uploads/"))) ||
+      (typeof img === "string" &&
+        (img.endsWith(".jpg") ||
+          img.endsWith(".jpeg") ||
+          img.endsWith(".png") ||
+          img.endsWith(".webp") ||
+          img.startsWith("http") ||
+          img.startsWith("uploads/"))) ||
       img instanceof File
   );
 
@@ -58,20 +64,19 @@ export default function SwiperImages({ images, handleRemoveImages }) {
 
         return (
           <SwiperSlide key={index}>
-            <button
-              onClick={() => handleRemoveImages(index)}
-              className="absolute top-0 z-10 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
-            >
-              ✕
-            </button>
-            <Image
+            {handleRemoveImages && (
+              <button
+                onClick={() => handleRemoveImages(index)}
+                className="absolute top-0 z-10 right-0 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+              >
+                ✕
+              </button>
+            )}
+            <img
               src={imgSrc}
               alt={`Slide ${index + 1}`}
-              width={500}
-              height={500}
-              className="mx-auto"
-              unoptimized
-              style={{ maxHeight: "350px", height: "100%", objectFit: "cover" }}
+              className="mx-auto object-cover"
+              style={{ maxHeight: "350px", height: "100%" }}
             />
           </SwiperSlide>
         );

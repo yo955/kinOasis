@@ -1,8 +1,6 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import ThemeToggle from "../ThemeToggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +14,6 @@ const Header = () => {
   };
 
   return (
-    // <header className="py-6 bg-[url('/cover.jpg')] bg-cover bg-center">
     <header className="py-6 bg-[#2F476D] bg-cover bg-center">
       <div className="mx-auto max-w-screen-xl container">
         <div className="flex h-16 items-center justify-between">
@@ -25,17 +22,15 @@ const Header = () => {
             <Link prefetch={true} className="block text-teal-600" href="/">
               <span className="sr-only">Home</span>
               <div className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-2xl z-10">
-                  <Image
-                    className="z-10 object-contain"
-                    src="/logo.png"
-                    alt="شعار الموقع"
-                    fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                  />
+                <img
+                  src="/logo.png"
+                  alt="شعار الموقع"
+                  className="z-10 object-contain w-full h-full"
+                />
               </div>
             </Link>
           </div>
-          {/* <ThemeToggle /> */}
+
           {/* أيقونة القائمة */}
           <div className="md:hidden flex items-center">
             <button

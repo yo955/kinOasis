@@ -1,22 +1,18 @@
 "use client";
 import styles from "./sidebar.module.css";
 import MenuLink from "./menuLink/MenuLink";
-import Image from "next/image";
 import { PiBuildingApartment } from "react-icons/pi";
 import {
   MdDashboard,
   MdSupervisedUserCircle,
   MdShoppingBag,
-  MdAttachMoney,
-  MdWork,
-  MdAnalytics,
-  MdPeople,
   MdOutlineSettings,
   MdHelpCenter,
   MdLogout,
 } from "react-icons/md";
 
 import { useRouter } from "next/navigation";
+
 const menuItems = [
   {
     title: "pages",
@@ -43,7 +39,6 @@ const menuItems = [
       },
     ],
   },
-
   {
     title: "User",
     list: [
@@ -72,12 +67,13 @@ const Sidebar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.user}>
-        <Image
+        <img
           className={styles.userImage}
           src="/noavatar.png"
           alt="userImage"
-          height={50}
           width={50}
+          height={50}
+          loading="lazy"
         />
         <div className={styles.userDetails}>
           <span className={styles.username}>userName: user</span>
@@ -85,16 +81,14 @@ const Sidebar = () => {
         </div>
       </div>
       <ul className={styles.list}>
-        {menuItems.map((cat) => {
-          return (
-            <li key={cat.title}>
-              <span className={styles.cat}>{cat.title}</span>
-              {cat.list.map((item) => {
-                return <MenuLink key={item.title} item={item} />;
-              })}
-            </li>
-          );
-        })}
+        {menuItems.map((cat) => (
+          <li key={cat.title}>
+            <span className={styles.cat}>{cat.title}</span>
+            {cat.list.map((item) => (
+              <MenuLink key={item.title} item={item} />
+            ))}
+          </li>
+        ))}
       </ul>
       <div className={styles.logout} onClick={logoutUser}>
         <MdLogout />

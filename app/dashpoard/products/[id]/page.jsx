@@ -1,7 +1,6 @@
 "use client";
 import styles from "@/app/ui/dashpoard/products/singleproduct/singleproduct.module.css";
 import axios from "axios";
-import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -64,7 +63,6 @@ const SingleProductPage = () => {
             map: value?.split(/src="/)[1]?.split('"')[0],
           });
     } else if (name === "images") {
-      // حماية: إذا المستخدم كتب سترينج أو لصق صور مفصولة بفاصلة
       let imagesArr = value;
       if (typeof value === "string") {
         if (value.includes(",")) {
@@ -85,8 +83,8 @@ const SingleProductPage = () => {
         [name.toLowerCase()]: value,
       }));
     }
-    console.log(product);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const jwt = localStorage.getItem("jwt");
@@ -97,16 +95,15 @@ const SingleProductPage = () => {
       return;
     }
 
-    setIsLoading(true); // <-- أضف هذا السطر ليظهر اللودر
+    setIsLoading(true);
 
     const formData = new FormData();
 
     Object.entries(product).forEach(([key, value]) => {
       if (key === "images" && Array.isArray(value)) {
-        // بنرسل كل الصور في نفس المفتاح سواء كانت جديدة أو قديمة
         value.forEach((img) => {
           if (typeof img === "string") {
-            formData.append("images", img); // خلي بالك، ده محتاج الباك إند يقبله كـ string
+            formData.append("images", img);
           } else if (img instanceof File) {
             formData.append("images", img);
           }
@@ -140,7 +137,7 @@ const SingleProductPage = () => {
       console.error("Error updating compound:", error);
       toast.error("Failed to update compound.", { position: "bottom-right" });
     } finally {
-      setIsLoading(false); // <-- أضف هذا السطر ليختفي اللودر
+      setIsLoading(false);
     }
   };
 
@@ -164,6 +161,7 @@ const SingleProductPage = () => {
       <ToastContainer />
 
       <div className="flex gap-5 items-center justify-between ">
+        {/* Main Image */}
         <div className={`${styles.infoContainer}`}>
           {product.mainImage ? (
             <div className={`${styles.imgContainer}`}>
@@ -173,7 +171,7 @@ const SingleProductPage = () => {
               >
                 ✕
               </button>
-              <Image
+              <img
                 src={
                   product.mainImage instanceof File
                     ? URL.createObjectURL(product.mainImage)
@@ -182,12 +180,11 @@ const SingleProductPage = () => {
                     : "/noproduct.jpg"
                 }
                 alt="productImage"
-                fill
                 className={`${styles.userImg}`}
               />
             </div>
           ) : (
-            <Image
+            <img
               src="/noproduct.jpg"
               alt="No Product"
               width={250}
@@ -204,20 +201,19 @@ const SingleProductPage = () => {
             }}
           />
         </div>
+
         {/* Images */}
         <div className={`${styles.infoContainer} `}>
           <div className={`${styles.imgContainer}`}>
             {product.images.length > 0 ? (
               <SwiperImages
-                // مرر الصور كما هي (سترينج أو File)، وSwiperImages سيعالجها
                 images={product.images}
                 handleRemoveImages={handleRemoveImages}
               />
             ) : (
-              <Image
+              <img
                 src="/noproduct.jpg"
                 alt="No Product"
-                fill
                 className="absolute rounded-md bg-cover"
               />
             )}
@@ -228,7 +224,6 @@ const SingleProductPage = () => {
             multiple
             onChange={(e) => {
               const files = Array.from(e.target.files);
-              // حماية: لا تدمج إلا إذا كل العناصر ملفات أو سترينج صورة
               if (files.length > 0) {
                 setProduct((prev) => ({
                   ...prev,
@@ -246,57 +241,56 @@ const SingleProductPage = () => {
             }}
           />
         </div>
-        {/* Video Upload */}
       </div>
 
-      <div>
-        {/* PDF Upload */}
-        <div className=" p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
-          <div className="title">Edit PDF</div>
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={(e) => {
-              if (e.target.files?.[0])
-                setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
-            }}
-          />
-        </div>
-
-        <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
-          <div className="title">Edit Video</div>
-          {product.video && (
-            <div className="flex flex-col">
-              <video width="300" controls>
-                <source
-                  src={`https://kinoasis.online/${product.video}`}
-                  type="video/mp4"
-                />
-              </video>
-              <button
-                className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3"
-                onClick={() => {
-                  setProduct((prev) => ({
-                    ...prev,
-                    video: "",
-                  }));
-                }}
-              >
-                delete
-              </button>
-            </div>
-          )}
-          <input
-            type="file"
-            accept="video/*"
-            onChange={(e) => {
-              if (e.target.files?.[0])
-                setProduct((prev) => ({ ...prev, video: e.target.files[0] }));
-            }}
-          />
-        </div>
+      {/* PDF */}
+      <div className=" p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+        <div className="title">Edit PDF</div>
+        <input
+          type="file"
+          accept="application/pdf"
+          onChange={(e) => {
+            if (e.target.files?.[0])
+              setProduct((prev) => ({ ...prev, pdf: e.target.files[0] }));
+          }}
+        />
       </div>
 
+      {/* Video */}
+      <div className="mt-5 p-3 flex flex-col items-center bg-blue-950 rounded-2xl">
+        <div className="title">Edit Video</div>
+        {product.video && (
+          <div className="flex flex-col">
+            <video width="300" controls>
+              <source
+                src={`https://kinoasis.online/${product.video}`}
+                type="video/mp4"
+              />
+            </video>
+            <button
+              className="bg-red-500 rounded-lg w-[200px] flex mx-auto text-center justify-center p-3 my-3"
+              onClick={() => {
+                setProduct((prev) => ({
+                  ...prev,
+                  video: "",
+                }));
+              }}
+            >
+              delete
+            </button>
+          </div>
+        )}
+        <input
+          type="file"
+          accept="video/*"
+          onChange={(e) => {
+            if (e.target.files?.[0])
+              setProduct((prev) => ({ ...prev, video: e.target.files[0] }));
+          }}
+        />
+      </div>
+
+      {/* Form */}
       <div className={styles.formContainer}>
         <form
           onSubmit={handleSubmit}
@@ -318,8 +312,8 @@ const SingleProductPage = () => {
             value={product.location}
             onChange={handleChange}
           />
-          <label>Status</label>
 
+          <label>Status</label>
           <select name="status" value={product.status} onChange={handleChange}>
             <option value="available">Available</option>
             <option value="soon">Soon</option>
@@ -352,6 +346,7 @@ const SingleProductPage = () => {
             onChange={handleChange}
             rows={5}
           ></textarea>
+
           <button type="submit" disabled={isLoading}>
             {isLoading ? <TbLoader2 className="animate-spin" /> : "Update"}
           </button>

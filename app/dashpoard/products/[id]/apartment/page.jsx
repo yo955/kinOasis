@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
-import Image from "next/image";
 import Head from "next/head";
 import { toast, ToastContainer } from "react-toastify";
 import styles from "@/app/ui/dashpoard/products/singleproduct/apartment/apartment.module.css";
@@ -130,19 +129,19 @@ const ApartmentPage = () => {
               currentApartments.map((apartment) => (
                 <tr key={apartment._id} className="text-center">
                   <td className="border border-gray-300 px-4 py-2">
-                    <Image
-                       src={
-                        apartment.mainImage instanceof File
-                          ? URL.createObjectURL(apartment.mainImage) // عرض الصورة الجديدة
-                          : apartment.mainImage
-                          ? `https://kinoasis.online/${apartment.mainImage}`
-                          : "/noproduct.jpg"
-                      }
-                      alt="ApartmentImg"
-                      width={100}
-                      height={100}
-                      className="w-full h-full "
-                    />
+                    <td className="border border-gray-300 px-4 py-2">
+                      <img
+                        src={
+                          apartment.mainImage instanceof File
+                            ? URL.createObjectURL(apartment.mainImage) // لو الصورة جديدة
+                            : apartment.mainImage
+                            ? `https://kinoasis.online/${apartment.mainImage}` // من السيرفر
+                            : "/noproduct.jpg" // صورة افتراضية
+                        }
+                        alt="ApartmentImg"
+                        className="w-[100px] h-[100px] object-cover"
+                      />
+                    </td>
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     {apartment.identity || "N/A"}

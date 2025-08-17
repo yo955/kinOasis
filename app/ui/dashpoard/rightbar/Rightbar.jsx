@@ -1,17 +1,16 @@
-import Image from "next/image";
 import styles from "./rightbar.module.css";
 import { MdPlayCircleFilled } from "react-icons/md";
+
 const Rightar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.item}>
         <div className={styles.bgContainer}>
-          <Image
+          <img
             src="/astronaut.png"
             alt="astronaut"
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className={styles.bg}
+            loading="lazy"
           />
         </div>
         <div className={styles.text}>
@@ -32,9 +31,9 @@ const Rightar = () => {
           </button>
         </div>
       </div>
+
       {/* 2 */}
       <div className={styles.item}>
-       
         <div className={styles.text}>
           <span className={styles.notification}>Available Now</span>
           <h3 className={styles.title}>

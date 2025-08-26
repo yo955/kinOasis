@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "المملكة العقارية | Saudi Real Estate",
+  title: "    كن أويسس  | Kin Oasis RealEstate",
   description:
     "اكتشف أفضل العقارات في السعودية: شقق، فلل، وأراضي للبيع والإيجار بأفضل الأسعار والخدمات.",
   keywords: [

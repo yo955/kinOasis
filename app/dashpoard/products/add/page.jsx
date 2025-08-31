@@ -138,11 +138,7 @@ const AddProductPage = () => {
                       />
                     </>
                   ) : (
-                    <img
-                      src="/noproduct.jpg"
-                      alt="No Product"
-                      className="absolute w-full h-full object-cover rounded-md"
-                    />
+                    <p>لا يوجد صور</p>
                   )}
                 </div>
               </div>

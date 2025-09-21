@@ -135,7 +135,7 @@ const ApartmentPage = () => {
                           apartment.mainImage instanceof File
                             ? URL.createObjectURL(apartment.mainImage) // لو الصورة جديدة
                             : apartment.mainImage
-                            ? `https://kinoasis.online/${apartment.mainImage}` // من السيرفر
+                            ? `https://api.kinoasis.com/${apartment.mainImage}` // من السيرفر
                             : "/noproduct.jpg" // صورة افتراضية
                         }
                         alt="ApartmentImg"

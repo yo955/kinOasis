@@ -120,7 +120,7 @@ const SingleProductPage = () => {
 
     try {
       await axios.patch(
-        `https://kinoasis.online/compound/update/${product._id}`,
+        `https://api.kinoasis.com/compound/update/${product._id}`,
         formData,
         {
           withCredentials: true,
@@ -176,7 +176,7 @@ const SingleProductPage = () => {
                   product.mainImage instanceof File
                     ? URL.createObjectURL(product.mainImage)
                     : product.mainImage
-                    ? `https://kinoasis.online/${product.mainImage}`
+                    ? `https://api.kinoasis.com/${product.mainImage}`
                     : "/noproduct.jpg"
                 }
                 alt="productImage"
@@ -263,7 +263,7 @@ const SingleProductPage = () => {
           <div className="flex flex-col">
             <video width="300" controls>
               <source
-                src={`https://kinoasis.online/${product.video}`}
+                src={`https://api.kinoasis.com/${product.video}`}
                 type="video/mp4"
               />
             </video>

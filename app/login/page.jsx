@@ -27,7 +27,7 @@ const LoginPage = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://kinoasis.online/user/login",
+        "https://api.kinoasis.com/user/login",
         {
           username,
           password,

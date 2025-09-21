@@ -118,7 +118,7 @@ const ProductsPage = () => {
                       <img
                         src={
                           product.mainImage
-                            ? `https://kinoasis.online/${product.mainImage}`
+                            ? `https://api.kinoasis.com/${product.mainImage}`
                             : "/noproduct.jpg"
                         }
                         alt={product.title}

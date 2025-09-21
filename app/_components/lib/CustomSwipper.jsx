@@ -36,8 +36,8 @@ const CustomSwiper = ({ images, apartment, handleRemoveImages }) => {
               image.src.startsWith("blob")
                 ? image.src
                 : String(image.src).startsWith("uploads")
-                ? `https://kinoasis.online/${image.src}`
-                : `https://kinoasis.online/uploads/${
+                ? `https://api.kinoasis.com/${image.src}`
+                : `https://api.kinoasis.com/uploads/${
                     apartment.compound + "/" + apartment._id
                   }/images/${image.src}`
             }

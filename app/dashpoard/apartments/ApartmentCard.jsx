@@ -8,7 +8,7 @@ const ApartmentCard = ({ apartment }) => {
 
         <div className="relative w-full h-56">
           <img
-            src={`https://kinoasis.online/${apartment.mainImage}`}
+            src={`https://api.kinoasis.com/${apartment.mainImage}`}
             alt="مشروع عقاري"
             className="absolute inset-0 w-full h-full rounded-2xl p-2 object-cover"
           />

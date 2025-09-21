@@ -59,7 +59,7 @@ export default function SwiperImages({ images, handleRemoveImages }) {
           typeof img === "string"
             ? img.startsWith("http")
               ? img
-              : `https://kinoasis.online/${img}`
+              : `https://api.kinoasis.com/${img}`
             : URL.createObjectURL(img);
 
         return (
